@@ -14,7 +14,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         })
         if (!res.ok) throw new Error('Invalid credentials')
         const data = await res.json()
-        setUser(data)
+        setUser(data.user)
     }
 
     const logout = async () => {

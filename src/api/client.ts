@@ -1,10 +1,14 @@
 const BASE_URL = 'http://localhost:3000'
 
-let authToken: string | null = null
+let authToken: string | null = localStorage.getItem('jwt')
 
 export const setAuthToken = (token: string | null) => {
     authToken = token
+    if (token) localStorage.setItem('jwt', token)
+    else localStorage.removeItem('jwt')
 }
+
+export const getAuthToken = () => authToken
 
 export const apiFetch = async (path: string, options: RequestInit = {}) => {
     const headers: Record<string, string> = {

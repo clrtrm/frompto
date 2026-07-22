@@ -3,4 +3,5 @@
     align-items: center;
     padding: 0.8rem 1.6rem;
     gap: 1rem;
+    border: 0.2rem solid goldenrod;
 }

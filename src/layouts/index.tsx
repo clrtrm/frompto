@@ -7,7 +7,9 @@ const Layout = (): ReactElement => {
     return (
         <div className="layout">
             <NavBar />
-            <Outlet />
+            <div className="layout__page-container">
+                <Outlet />
+            </div>
         </div>
     )
 }

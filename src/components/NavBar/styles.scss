@@ -1,7 +1,7 @@
 .navbar-component {
     display: flex;
     align-items: center;
-    padding: 0.8rem 1.6rem;
+    padding: $spacing-sm $spacing-md;
     gap: 1rem;
     background-color: $color-primary-70;
     color: $color-neutral-5;
@@ -17,16 +17,16 @@
         align-items: center;
 
         &__left {
-            font-size: 1.6rem;
+            font-size: $spacing-md;
         }
 
         &__right {
             display: flex;
-            column-gap: 0.8rem;
+            column-gap: $spacing-sm;
 
             .auth-actions {
                 display: flex;
-                column-gap: 0.8rem;
+                column-gap: $spacing-sm;
             }
         }
     }

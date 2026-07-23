@@ -3,31 +3,28 @@
     align-items: center;
     padding: 0.8rem 1.6rem;
     gap: 1rem;
-    border: 0.2rem solid red;
+    background-color: $color-primary-70;
+    color: $color-neutral-5;
+
+    a {
+        color: $color-neutral-5;
+    }
 
     .navigation {
-        border: 0.2rem solid orange;
         width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
 
-        .navigation__left {
-            border: 0.2rem solid yellow;
+        &__left {
             font-size: 1.6rem;
         }
 
-        .navigation__right {
-            border: 0.2rem solid green;
+        &__right {
             display: flex;
             column-gap: 0.8rem;
 
-            .nav-links {
-                border: 0.2rem solid blue;
-            }
-
             .auth-actions {
-                border: 0.2rem solid purple;
                 display: flex;
                 column-gap: 0.8rem;
             }

@@ -2,7 +2,7 @@ import type { ReactElement } from "react"
 import { useAuth } from "../../context/auth/useAuth"
 import { NavLink, useNavigate } from "react-router-dom"
 
-import './styles.css'
+import './styles.scss'
 
 type TNavigationLocation = { label: string, path: string }
 

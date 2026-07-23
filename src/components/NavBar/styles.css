@@ -3,5 +3,34 @@
     align-items: center;
     padding: 0.8rem 1.6rem;
     gap: 1rem;
-    border: 0.2rem solid goldenrod;
+    border: 0.2rem solid red;
+
+    .navigation {
+        border: 0.2rem solid orange;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .navigation__left {
+            border: 0.2rem solid yellow;
+            font-size: 1.6rem;
+        }
+
+        .navigation__right {
+            border: 0.2rem solid green;
+            display: flex;
+            column-gap: 0.8rem;
+
+            .nav-links {
+                border: 0.2rem solid blue;
+            }
+
+            .auth-actions {
+                border: 0.2rem solid purple;
+                display: flex;
+                column-gap: 0.8rem;
+            }
+        }
+    }
 }

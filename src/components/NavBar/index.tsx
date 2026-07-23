@@ -1,7 +1,14 @@
 import type { ReactElement } from "react"
 import { useAuth } from "../../context/auth/useAuth"
-import { useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
+
 import './styles.css'
+
+type TNavigationLocation = { label: string, path: string }
+
+const NAVIGATION_LOCATION: TNavigationLocation[] = [
+    { label: 'Profile', path: '/profile' }
+]
 
 const NavBar = (): ReactElement => {
     /** Local state */
@@ -9,21 +16,46 @@ const NavBar = (): ReactElement => {
 
     const navigate = useNavigate()
 
+    const navLinks = NAVIGATION_LOCATION.map(({ label, path }) => (
+        <li key={path} >
+            <NavLink to={path}>{label}</NavLink>
+        </li>
+    ))
+
     /** Handlers */
-    const handleLogoutButtonClick = async () => {
+    const handleLogout = async () => {
         await logout()
-        navigate('/login')
+        navigate('/')
     }
 
     /** Render */
     return (
         <div className="navbar-component">
-            {user ?
-                <>
-                    <p>Welcome, {user.display_name}!</p>
-                    <button onClick={handleLogoutButtonClick}>Log out</button>
-                </> : null}
-        </div>
+            <nav className="navigation" aria-label="main">
+                <div className="navigation__left">
+                    <div className="logo">
+                        <NavLink to="/">Prompto</NavLink>
+                    </div>
+                </div>
+                <div className="navigation__right">
+                    <div className="nav-links">
+                        <ul>
+                            {navLinks}
+                        </ul>
+                    </div>
+                    {user ?
+                        <div className="auth-actions auth-actions--authenticated">
+                            <p>Hello, {user.display_name}!</p>
+                            <button onClick={handleLogout}>Sign out</button>
+                        </div>
+                        :
+                        <div className="auth-actions auth-actions--not-authenticated">
+                            <NavLink to="/login">Sign in</NavLink>
+                        </div>
+                    }
+                </div>
+            </nav>
+        </div >
     )
 }
 

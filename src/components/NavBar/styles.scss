@@ -1,33 +1,33 @@
 .navbar-component {
-    display: flex;
-    align-items: center;
-    padding: $spacing-sm $spacing-md;
-    gap: 1rem;
-    background-color: $color-primary-70;
+  display: flex;
+  align-items: center;
+  padding: $spacing-sm $spacing-md;
+  gap: 1rem;
+  background-color: $color-primary-70;
+  color: $color-neutral-5;
+
+  a {
     color: $color-neutral-5;
+  }
 
-    a {
-        color: $color-neutral-5;
+  .navigation {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__left {
+      font-size: $spacing-md;
     }
 
-    .navigation {
-        width: 100%;
+    &__right {
+      display: flex;
+      column-gap: $spacing-sm;
+
+      .auth-actions {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        &__left {
-            font-size: $spacing-md;
-        }
-
-        &__right {
-            display: flex;
-            column-gap: $spacing-sm;
-
-            .auth-actions {
-                display: flex;
-                column-gap: $spacing-sm;
-            }
-        }
+        column-gap: $spacing-sm;
+      }
     }
+  }
 }

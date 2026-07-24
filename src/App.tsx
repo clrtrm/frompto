@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Layout from "./layouts"
+import Layout from './layouts'
 import Login from './pages/Login.tsx'
 import ProfilePage from './pages/Profile/index.tsx'
 import ProtectedRoute from './components/ProtectedRoute.tsx'

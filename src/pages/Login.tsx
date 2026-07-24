@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import type { SubmitEventHandler } from 'react'
 import { useNavigate, Navigate } from 'react-router-dom'
-import { useAuth } from '~/context/auth/useAuth'
+import useAuth from '~/context/auth/useAuth'
 
-export default function Login() {
+const Login = () => {
   /** Local state */
 
   const [email, setEmail] = useState('')
@@ -53,3 +53,5 @@ export default function Login() {
     </form>
   )
 }
+
+export default Login

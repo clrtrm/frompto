@@ -4,7 +4,7 @@ import { apiFetch, getAuthToken, setAuthToken } from '~/api/client'
 import type { IUser } from '~/types/auth'
 import { AuthContext } from './AuthContext'
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<IUser | null>(null)
 
   const [loading, setLoading] = useState(true)
@@ -52,3 +52,5 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     </AuthContext.Provider>
   )
 }
+
+export default AuthProvider

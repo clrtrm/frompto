@@ -1,11 +1,11 @@
 import type { ReactElement } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Layout from './layouts'
-import Login from './pages/Login.tsx'
-import ProfilePage from './pages/Profile/index.tsx'
-import ProtectedRoute from './components/ProtectedRoute.tsx'
-import NotFoundPage from './pages/NotFound/index.tsx'
-import RootPage from './pages/RootPage/index.tsx'
+import Layout from '~/layouts'
+import Login from '~/pages/Login.tsx'
+import ProfilePage from '~/pages/Profile/index.tsx'
+import ProtectedRoute from '~/components/ProtectedRoute.tsx'
+import NotFoundPage from '~/pages/NotFound/index.tsx'
+import RootPage from '~/pages/RootPage/index.tsx'
 
 const App = (): ReactElement => {
   return (

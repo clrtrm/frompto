@@ -1,32 +1,32 @@
 .navbar-component {
-  display: flex;
   align-items: center;
-  padding: $spacing-sm $spacing-md;
-  gap: 1rem;
   background-color: $color-primary-70;
   color: $color-neutral-5;
+  display: flex;
+  gap: 1rem;
+  padding: $spacing-sm $spacing-md;
 
   a {
     color: $color-neutral-5;
   }
 
   .navigation {
-    width: 100%;
+    align-items: center;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    width: 100%;
 
     &__left {
       font-size: $spacing-md;
     }
 
     &__right {
-      display: flex;
       column-gap: $spacing-sm;
+      display: flex;
 
       .auth-actions {
-        display: flex;
         column-gap: $spacing-sm;
+        display: flex;
       }
     }
   }

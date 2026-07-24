@@ -2,13 +2,13 @@ html {
   height: 100%;
 
   * {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    font-family: $font-primary;
-    text-decoration: none;
     box-sizing: border-box;
+    font-family: $font-primary;
     font-size: 16px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
   }
 
   #root {

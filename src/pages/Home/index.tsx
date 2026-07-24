@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react'
-import { useAuth } from '~/context/auth/useAuth'
+import useAuth from '~/context/auth/useAuth'
 
 const HomePage = (): ReactElement => {
   const { user } = useAuth()

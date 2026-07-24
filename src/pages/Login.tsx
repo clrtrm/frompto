@@ -1,7 +1,7 @@
-import { useState, type FormEvent } from 'react'
+import { useState } from 'react'
+import type { SubmitEventHandler } from 'react'
 import { useNavigate, Navigate } from 'react-router-dom'
 import { useAuth } from '~/context/auth/useAuth'
-import {} from 'react-router-dom'
 
 export default function Login() {
   /** Local state */
@@ -18,7 +18,7 @@ export default function Login() {
 
   /** Handlers */
 
-  async function handleSubmit(e: FormEvent) {
+  const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
     try {
       await login(email, password)

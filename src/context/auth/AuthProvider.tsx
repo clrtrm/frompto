@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import type { ReactNode } from 'react'
-import { apiFetch, getAuthToken, setAuthToken } from '../../api/client'
-import type { IUser } from '../../types/auth'
+import { apiFetch, getAuthToken, setAuthToken } from '~/api/client'
+import type { IUser } from '~/types/auth'
 import { AuthContext } from './AuthContext'
 
 export function AuthProvider({ children }: { children: ReactNode }) {

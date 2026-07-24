@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'node:path'
 
 export default defineConfig({
   plugins: [react()],
@@ -7,16 +8,16 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-          @use "@/styles/colors.scss" as *;
-          @use "@/styles/sizes.scss" as *;
-          @use "@/styles/fonts.scss" as *;
+          @use "~/styles/colors.scss" as *;
+          @use "~/styles/sizes.scss" as *;
+          @use "~/styles/fonts.scss" as *;
         `,
       },
     },
   },
   resolve: {
     alias: {
-      '@': '/src',
+      '~': path.resolve(__dirname, './src'),
     },
   },
 })

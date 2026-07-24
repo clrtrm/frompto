@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 import type { ReactElement } from "react"
-import NavBar from "../components/NavBar"
+import NavBar from "~/components/NavBar"
 import './styles.scss'
 
 const Layout = (): ReactElement => {

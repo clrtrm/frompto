@@ -1,7 +1,7 @@
 import type { ReactElement } from "react"
-import { useAuth } from "../../context/auth/useAuth"
-import HomePage from "../Home"
-import LandingPage from "../Landing"
+import { useAuth } from "~/context/auth/useAuth"
+import HomePage from "~/pages/Home"
+import LandingPage from "~/pages/Landing"
 
 const RootPage = (): ReactElement => {
     const { user, loading } = useAuth()

@@ -1,16 +1,19 @@
 import type { ReactElement } from 'react'
 import useAuth from '~/context/auth/useAuth'
 import { NavLink, useNavigate } from 'react-router-dom'
+import type { TUserRole } from '~/types/auth'
 
 import './styles.scss'
 
 type TNavigationLocation = {
   label: string
   path: string
+  scope?: TUserRole[]
 }
 
 const NAVIGATION_LOCATION: TNavigationLocation[] = [
   { label: 'Profile', path: '/profile' },
+  // { label: 'Dashboard', path: '/dashboard', scope: ['admin'] },
 ]
 
 const NavBar = (): ReactElement => {
@@ -19,7 +22,12 @@ const NavBar = (): ReactElement => {
 
   const navigate = useNavigate()
 
-  const navLinks = NAVIGATION_LOCATION.map(({ label, path }) => (
+  const visibleLocations = NAVIGATION_LOCATION.filter(({ scope }) => {
+    if (!scope) return true
+    return user?.role && scope.includes(user.role)
+  })
+
+  const navLinks = visibleLocations.map(({ label, path }) => (
     <li key={path}>
       <NavLink to={path}>{label}</NavLink>
     </li>

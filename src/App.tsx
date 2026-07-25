@@ -6,6 +6,7 @@ import ProfilePage from '~/pages/Profile/index.tsx'
 import ProtectedRoute from '~/components/ProtectedRoute.tsx'
 import NotFoundPage from '~/pages/NotFound/index.tsx'
 import RootPage from '~/pages/RootPage/index.tsx'
+import DashboardPage from './pages/Dashboard'
 
 const App = (): ReactElement => {
   return (
@@ -15,6 +16,9 @@ const App = (): ReactElement => {
         <Route index element={<RootPage />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<ProfilePage />} />
+          <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+            <Route path="/dashboard" element={<DashboardPage />} />
+          </Route>
         </Route>
       </Route>
 

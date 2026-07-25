@@ -2,12 +2,24 @@ import { Navigate, Outlet } from 'react-router-dom'
 import type { ReactElement } from 'react'
 import useAuth from '~/context/auth/useAuth'
 
-const ProtectedRoute = (): ReactElement => {
+type TUserRole = 'admin' | 'member'
+
+type ProtectedRouteProps = {
+  allowedRoles?: TUserRole[]
+}
+
+const ProtectedRoute = ({
+  allowedRoles,
+}: ProtectedRouteProps): ReactElement => {
   const { user, loading } = useAuth()
 
   if (loading) return <div>Loading...</div>
 
   if (!user) return <Navigate to="/login" replace />
+
+  if (allowedRoles && !allowedRoles.includes(user.role)) {
+    return <Navigate to="/" replace />
+  }
 
   return <Outlet />
 }

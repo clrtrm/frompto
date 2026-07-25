@@ -8,12 +8,13 @@ import './styles.scss'
 type TNavigationLocation = {
   label: string
   path: string
+  public?: boolean
   scope?: TUserRole[]
 }
 
 const NAVIGATION_LOCATION: TNavigationLocation[] = [
   { label: 'Profile', path: '/profile' },
-  // { label: 'Dashboard', path: '/dashboard', scope: ['admin'] },
+  { label: 'Dashboard', path: '/dashboard', scope: ['admin'] },
 ]
 
 const NavBar = (): ReactElement => {
@@ -22,10 +23,14 @@ const NavBar = (): ReactElement => {
 
   const navigate = useNavigate()
 
-  const visibleLocations = NAVIGATION_LOCATION.filter(({ scope }) => {
-    if (!scope) return true
-    return user?.role && scope.includes(user.role)
-  })
+  const visibleLocations = NAVIGATION_LOCATION.filter(
+    ({ public: isPublic, scope }) => {
+      if (isPublic) return true
+      if (!user) return false
+      if (!scope) return true
+      return user?.role && scope.includes(user.role)
+    },
+  )
 
   const navLinks = visibleLocations.map(({ label, path }) => (
     <li key={path}>
@@ -49,12 +54,10 @@ const NavBar = (): ReactElement => {
           </div>
         </div>
         <div className="navigation__right">
-          <div className="nav-links">
-            <ul>{navLinks}</ul>
-          </div>
+          <ul className="nav-links">{navLinks}</ul>
           {user ? (
             <div className="auth-actions auth-actions--authenticated">
-              <p>Hello, {user.display_name}!</p>
+              <p className="user-greeting">Hello, {user.display_name}!</p>
               <button onClick={handleLogout}>Sign out</button>
             </div>
           ) : (

@@ -1,9 +1,9 @@
 export type TUserRole = 'admin' | 'member'
 
 export interface IUser {
-  id: number
+  id: string
   email: string
   username: string
-  display_name: string
+  displayName: string
   role: TUserRole
 }

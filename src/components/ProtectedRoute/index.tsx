@@ -2,7 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 import type { ReactElement } from 'react'
 import useAuth from '~/context/auth/useAuth'
 
-type TUserRole = 'admin' | 'member'
+import type { TUserRole } from '~/types/auth'
 
 type ProtectedRouteProps = {
   allowedRoles?: TUserRole[]

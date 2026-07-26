@@ -41,7 +41,7 @@ const HomePage = (): ReactElement => {
   /** Render */
   return (
     <div className="page home-page">
-      <h1>Welcome back {user?.display_name}</h1>
+      <h1>Welcome back {user?.displayName}</h1>
       <span>Your question for today {new Date().toString()}:</span>
       {loading ? (
         <p>Loading...</p>

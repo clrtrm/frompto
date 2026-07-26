@@ -4,20 +4,27 @@ import useAuth from '~/context/auth/useAuth'
 import FormField from '~/components/auth/FormField'
 import { useNavigate } from 'react-router-dom'
 
-const Login = () => {
+const SignUp = () => {
   const [email, setEmail] = useState('')
+  const [displayName, setDisplayName] = useState('')
   const [password, setPassword] = useState('')
+  const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const [formError, setFormError] = useState('')
 
-  const { login } = useAuth()
+  const { signUp } = useAuth()
 
   const navigate = useNavigate()
 
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
 
+    if (password !== passwordConfirmation) {
+      setFormError('Passwords must match')
+      return
+    }
+
     try {
-      await login({ email, password })
+      await signUp({ email, password, displayName })
       navigate('/')
     } catch (e: unknown) {
       setFormError(
@@ -30,27 +37,45 @@ const Login = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Log in</h1>
+      <h1>Create a new account</h1>
       {formError ? <div className="form-errors">{formError}</div> : null}
       <FormField
+        autoComplete="username"
         id="email"
         label="Email"
         type="email"
         value={email}
         onChange={setEmail}
-        placeholder="Email"
+        placeholder="Your email"
       />
       <FormField
+        autoComplete="off"
+        id="displayName"
+        label="Display name"
+        value={displayName}
+        onChange={setDisplayName}
+        placeholder="Display name"
+      />
+      <FormField
+        autoComplete="new-password"
         id="password"
         label="Password"
         type="password"
         value={password}
         onChange={setPassword}
-        placeholder="Password"
+        placeholder="Your password"
       />
-      <button type="submit">Log in</button>
+      <FormField
+        id="password_confirmation"
+        label="Password confirmation"
+        type="password"
+        value={passwordConfirmation}
+        onChange={setPasswordConfirmation}
+        placeholder="Confirm your password"
+      />
+      <button type="submit">Sign up</button>
     </form>
   )
 }
 
-export default Login
+export default SignUp

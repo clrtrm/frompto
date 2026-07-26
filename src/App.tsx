@@ -1,19 +1,24 @@
 import type { ReactElement } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Layout from '~/layouts'
-import Login from '~/pages/Login.tsx'
-import ProfilePage from '~/pages/Profile/index.tsx'
-import ProtectedRoute from '~/components/ProtectedRoute.tsx'
-import NotFoundPage from '~/pages/NotFound/index.tsx'
-import RootPage from '~/pages/RootPage/index.tsx'
-import DashboardPage from './pages/Dashboard'
+import Login from '~/pages/Login'
+import ProfilePage from '~/pages/Profile'
+import ProtectedRoute from '~/components/ProtectedRoute'
+import GuestRoute from '~/components/GuestRoute'
+import NotFoundPage from '~/pages/NotFound'
+import RootPage from '~/pages/RootPage'
+import DashboardPage from '~/pages/Dashboard'
+import SignUp from '~/pages/Auth/SignUp'
 
 const App = (): ReactElement => {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/login" element={<Login />} />
         <Route index element={<RootPage />} />
+        <Route element={<GuestRoute />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Route>
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<ProfilePage />} />
           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>

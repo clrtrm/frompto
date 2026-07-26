@@ -57,12 +57,13 @@ const NavBar = (): ReactElement => {
           <ul className="nav-links">{navLinks}</ul>
           {user ? (
             <div className="auth-actions auth-actions--authenticated">
-              <p className="user-greeting">Hello, {user.display_name}!</p>
+              <p className="user-greeting">Hello, {user.displayName}!</p>
               <button onClick={handleLogout}>Sign out</button>
             </div>
           ) : (
             <div className="auth-actions auth-actions--not-authenticated">
               <NavLink to="/login">Sign in</NavLink>
+              <NavLink to="/signup">Sign up</NavLink>
             </div>
           )}
         </div>

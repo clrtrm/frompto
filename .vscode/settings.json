@@ -1,11 +1,13 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "[scss]": {
-    "editor.defaultFormatter": "mrmlnc.vscode-postcss-sorting",
-    "editor.formatOnSave": true
-  },
   "postcssSorting.config": {
     "properties-order": "alphabetical"
-  }
+  },
+  "multiCommand.commands": [
+    {
+      "command": "multiCommand.formatAndSortScss",
+      "sequence": ["postcssSorting.execute", "workbench.action.files.save"]
+    }
+  ]
 }

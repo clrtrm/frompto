@@ -1,0 +1,49 @@
+:root {
+  --primary-bg: #{$color-primary-60};
+  --secondary-bg: #{$color-secondary-70};
+  --ghost-bg: transparent;
+
+  --primary-text: #{$color-neutral-5};
+  --secondary-text: #{$color-neutral-5};
+  --ghost-text: #{$color-neutral-100};
+
+  --primary-border: #{$color-primary-60};
+  --secondary-border: #{$color-secondary-70};
+  --ghost-border: #{$color-neutral-25};
+}
+
+.button-component {
+  background-color: var(--bg-color);
+  border: 0.1rem solid var(--border-color);
+  border-radius: $radius-lg;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: $spacing-xs $spacing-md;
+  transition: filter 0.1s ease;
+
+  &.primary {
+    --bg-color: var(--primary-bg);
+    --text-color: var(--primary-text);
+    --border-color: var(--primary-border);
+  }
+
+  &.secondary {
+    --bg-color: var(--secondary-bg);
+    --text-color: var(--secondary-text);
+    --border-color: var(--secondary-border);
+  }
+
+  &.ghost {
+    --bg-color: var(--ghost-bg);
+    --text-color: var(--ghost-text);
+    --border-color: var(--ghost-border);
+  }
+
+  &:hover {
+    filter: brightness(1.2);
+  }
+
+  &:active {
+    filter: brightness(1.4);
+  }
+}

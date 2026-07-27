@@ -3,6 +3,7 @@ import type { SubmitEventHandler } from 'react'
 import useAuth from '~/context/auth/useAuth'
 import FormField from '~/components/auth/FormField'
 import { useNavigate } from 'react-router-dom'
+import Button from '~/components/Button'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -48,7 +49,7 @@ const Login = () => {
         onChange={setPassword}
         placeholder="Password"
       />
-      <button type="submit">Log in</button>
+      <Button label="Log in" type="submit" />
     </form>
   )
 }

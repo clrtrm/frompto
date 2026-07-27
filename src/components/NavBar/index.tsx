@@ -2,6 +2,7 @@ import type { ReactElement } from 'react'
 import useAuth from '~/context/auth/useAuth'
 import { NavLink, useNavigate } from 'react-router-dom'
 import type { TUserRole } from '~/types/auth'
+import Button from '~/components/Button'
 
 import './styles.scss'
 
@@ -58,7 +59,7 @@ const NavBar = (): ReactElement => {
           {user ? (
             <div className="auth-actions auth-actions--authenticated">
               <p className="user-greeting">Hello, {user.displayName}!</p>
-              <button onClick={handleLogout}>Sign out</button>
+              <Button label="Sign out" onClick={handleLogout} />
             </div>
           ) : (
             <div className="auth-actions auth-actions--not-authenticated">

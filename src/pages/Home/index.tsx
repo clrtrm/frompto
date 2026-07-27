@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { ReactElement } from 'react'
 import { apiFetch } from '~/api/client'
+import Button from '~/components/Button'
 import useAuth from '~/context/auth/useAuth'
 
 interface IPrompt {
@@ -50,7 +51,7 @@ const HomePage = (): ReactElement => {
       ) : (
         <p>No prompt for today yet.</p>
       )}
-      <button>Answer now</button>
+      <Button label="Answer now" />
       People have replied already!
     </div>
   )

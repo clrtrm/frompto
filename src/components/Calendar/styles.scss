@@ -1,0 +1,43 @@
+.calendar-component {
+  max-width: $main-container;
+  width: 100%;
+
+  .month-navigation {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+  }
+}
+
+.calendar-grid {
+  display: grid;
+  gap: 0.4rem;
+  grid-template-columns: repeat(7, 1fr);
+  margin-top: 1rem;
+
+  &.calendar-weekdays {
+    .calendar-weekday {
+      color: $color-neutral-100;
+      font-size: 0.8rem;
+      padding-bottom: $spacing-xs;
+      text-align: center;
+    }
+  }
+
+  .calendar-cell {
+    aspect-ratio: 1 / 1;
+    border: 0.1rem solid $color-neutral-25;
+    border-radius: $radius-lg;
+    font-size: 0.85rem;
+    padding: 0.6rem;
+
+    &:empty {
+      border-color: transparent;
+    }
+  }
+}

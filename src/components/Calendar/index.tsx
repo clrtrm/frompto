@@ -14,7 +14,9 @@ const Calendar = (): ReactElement => {
   /** Hooks */
   const [currentMonth, setCurrentMonth] = useState<Dayjs>(dayjs())
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
-  const [assignedDates, setAssignedDates] = useState<Set<string>>(new Set())
+  const [promptsByDate, setPromptsByDate] = useState<Map<string, string>>(
+    new Map(),
+  )
 
   /** Local State */
   const startOfMonth = currentMonth.startOf('month')
@@ -41,11 +43,11 @@ const Calendar = (): ReactElement => {
     setSelectedDate(currentMonth.date(day))
   }
 
-  const handlePanelClose = (dateKey: string, hasBody: boolean): void => {
+  const handlePanelClose = (dateKey: string, body: string): void => {
     setSelectedDate(null)
-    setAssignedDates((prev) => {
-      const next = new Set(prev)
-      if (hasBody) next.add(dateKey)
+    setPromptsByDate((prev) => {
+      const next = new Map(prev)
+      if (body) next.set(dateKey, body)
       else next.delete(dateKey)
       return next
     })
@@ -55,7 +57,9 @@ const Calendar = (): ReactElement => {
   useEffect(() => {
     const load = async (): Promise<void> => {
       const dailyPrompts = await fetchDailyPrompts()
-      setAssignedDates(new Set(dailyPrompts.map(({ date }) => date)))
+      setPromptsByDate(
+        new Map(dailyPrompts.map(({ date, body }) => [date, body])),
+      )
     }
     void load()
   }, [])
@@ -81,12 +85,11 @@ const Calendar = (): ReactElement => {
         {days.map((day, index) => {
           const date = day ? currentMonth.date(day) : null
           const dateKey = date?.format('YYYY-MM-DD')
+          const promptBody = dateKey ? promptsByDate.get(dateKey) : undefined
 
           const cellClasses = clsx('calendar-cell', {
             'calendar-cell--past': date?.isBefore(dayjs(), 'day'),
-            'calendar-cell--assigned': dateKey
-              ? assignedDates.has(dateKey)
-              : false,
+            'calendar-cell--assigned': !!promptBody,
           })
 
           return (
@@ -95,7 +98,14 @@ const Calendar = (): ReactElement => {
               className={cellClasses}
               onClick={() => day && handleDayClick(day)}
             >
-              {day}
+              {day ? (
+                <>
+                  <span className="calendar-cell__day-number">{day}</span>
+                  {promptBody ? (
+                    <span className="calendar-cell__prompt">{promptBody}</span>
+                  ) : null}
+                </>
+              ) : null}
             </div>
           )
         })}
@@ -103,8 +113,8 @@ const Calendar = (): ReactElement => {
       {selectedDate ? (
         <DatePanel
           date={selectedDate}
-          onClose={(hasBody) =>
-            handlePanelClose(selectedDate.format('YYYY-MM-DD'), hasBody)
+          onClose={(body) =>
+            handlePanelClose(selectedDate.format('YYYY-MM-DD'), body)
           }
         />
       ) : null}

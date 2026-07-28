@@ -1,5 +1,5 @@
 .calendar-component {
-  max-width: 60rem;
+  max-width: 90rem;
   width: 100%;
 
   .month-navigation {
@@ -34,8 +34,27 @@
     border: 0.1rem solid $color-neutral-25;
     border-radius: $radius-lg;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
     font-size: 0.85rem;
+    overflow: hidden;
     padding: 0.6rem;
+    row-gap: $spacing-xxs;
+
+    &__day-number {
+      font-weight: 500;
+    }
+
+    &__prompt {
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      font-size: $font-size-xs;
+      line-clamp: 6;
+      -webkit-line-clamp: 6;
+      line-height: 1.2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
     &--assigned {
       border-color: $color-primary-60;

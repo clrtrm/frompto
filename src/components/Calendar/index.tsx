@@ -1,19 +1,22 @@
 import dayjs from 'dayjs'
 import type { Dayjs } from 'dayjs'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { ReactElement } from 'react'
 import clsx from 'clsx'
 
 import Button from '~/components/Button'
 import DatePanel from '~/pages/Dashboard/DatePanel'
+import { fetchDailyPrompts } from '~/api/dailyPrompts'
 
 import './styles.scss'
 
 const Calendar = (): ReactElement => {
+  /** Hooks */
   const [currentMonth, setCurrentMonth] = useState<Dayjs>(dayjs())
-
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
+  const [assignedDates, setAssignedDates] = useState<Set<string>>(new Set())
 
+  /** Local State */
   const startOfMonth = currentMonth.startOf('month')
   const daysInMonth = currentMonth.daysInMonth()
   const startWeekday = (startOfMonth.day() + 6) % 7
@@ -25,6 +28,7 @@ const Calendar = (): ReactElement => {
     ...Array.from({ length: daysInMonth }, (_, i) => i + 1),
   ]
 
+  /** Handlers */
   const goToPreviousMonth = (): void => {
     setCurrentMonth((prev) => prev.subtract(1, 'month'))
   }
@@ -37,6 +41,26 @@ const Calendar = (): ReactElement => {
     setSelectedDate(currentMonth.date(day))
   }
 
+  const handlePanelClose = (dateKey: string, hasBody: boolean): void => {
+    setSelectedDate(null)
+    setAssignedDates((prev) => {
+      const next = new Set(prev)
+      if (hasBody) next.add(dateKey)
+      else next.delete(dateKey)
+      return next
+    })
+  }
+
+  /** Effects */
+  useEffect(() => {
+    const load = async (): Promise<void> => {
+      const dailyPrompts = await fetchDailyPrompts()
+      setAssignedDates(new Set(dailyPrompts.map(({ date }) => date)))
+    }
+    void load()
+  }, [])
+
+  /** Render */
   return (
     <div className="calendar-component">
       <div className="month-navigation">
@@ -56,9 +80,13 @@ const Calendar = (): ReactElement => {
       <div className="calendar-grid">
         {days.map((day, index) => {
           const date = day ? currentMonth.date(day) : null
+          const dateKey = date?.format('YYYY-MM-DD')
 
           const cellClasses = clsx('calendar-cell', {
             'calendar-cell--past': date?.isBefore(dayjs(), 'day'),
+            'calendar-cell--assigned': dateKey
+              ? assignedDates.has(dateKey)
+              : false,
           })
 
           return (
@@ -73,7 +101,12 @@ const Calendar = (): ReactElement => {
         })}
       </div>
       {selectedDate ? (
-        <DatePanel date={selectedDate} onClose={() => setSelectedDate(null)} />
+        <DatePanel
+          date={selectedDate}
+          onClose={(hasBody) =>
+            handlePanelClose(selectedDate.format('YYYY-MM-DD'), hasBody)
+          }
+        />
       ) : null}
     </div>
   )

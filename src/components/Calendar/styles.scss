@@ -1,5 +1,5 @@
 .calendar-component {
-  max-width: $main-container;
+  max-width: 60rem;
   width: 100%;
 
   .month-navigation {
@@ -36,6 +36,11 @@
     cursor: pointer;
     font-size: 0.85rem;
     padding: 0.6rem;
+
+    &--assigned {
+      border-color: $color-primary-60;
+      border-width: 0.2rem;
+    }
 
     &--past {
       /** Credits to Oscar Jite-Orimiono */

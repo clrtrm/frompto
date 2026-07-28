@@ -1,0 +1,14 @@
+.dashboard-page {
+  height: 100%;
+
+  .page-title {
+    font-size: $font-size-xl;
+  }
+
+  .dashboard-page-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: $spacing-xl;
+  }
+}

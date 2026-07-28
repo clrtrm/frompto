@@ -6,6 +6,11 @@ export type DailyPrompt = {
   body: string
 }
 
+export const fetchDailyPrompts = async (): Promise<DailyPrompt[]> => {
+  const res = await apiFetch('/daily_prompts')
+  return res.json()
+}
+
 export const fetchDailyPrompt = async (
   date: string,
 ): Promise<DailyPrompt | null> => {

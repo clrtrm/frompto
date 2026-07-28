@@ -11,17 +11,20 @@ import './styles.scss'
 
 interface Props {
   date: Dayjs
-  onClose: () => void
+  onClose: (hasBody: boolean) => void
 }
 
 const DatePanel = ({ date, onClose }: Props): ReactElement => {
+  /** Hooks */
   const [body, setBody] = useState('')
   const [prompts, setPrompts] = useState<Prompt[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [isSaving, setIsSaving] = useState(false)
 
+  /** Local State */
   const dateKey = date.format('YYYY-MM-DD')
 
+  /** Handlers */
   const handleSelectPrompt = (e: ChangeEvent<HTMLSelectElement>): void => {
     const selected = prompts.find((p) => String(p.id) === e.target.value)
     if (selected) setBody(selected.body)
@@ -32,11 +35,13 @@ const DatePanel = ({ date, onClose }: Props): ReactElement => {
   ): Promise<void> => {
     e.preventDefault()
     setIsSaving(true)
-    await upsertDailyPrompt(dateKey, body)
+    const trimmedBody = body.trim()
+    await upsertDailyPrompt(dateKey, trimmedBody)
     setIsSaving(false)
-    onClose()
+    onClose(trimmedBody.length > 0)
   }
 
+  /** Effects */
   useEffect(() => {
     const load = async (): Promise<void> => {
       setIsLoading(true)
@@ -44,18 +49,23 @@ const DatePanel = ({ date, onClose }: Props): ReactElement => {
         fetchDailyPrompt(dateKey),
         fetchPrompts(),
       ])
-      setBody(dailyPrompt?.body || '')
+      setBody(dailyPrompt?.body ?? '')
       setPrompts(availablePrompts)
       setIsLoading(false)
     }
     void load()
   }, [dateKey])
 
+  /** Render */
   return (
     <div className="date-panel-component">
       <div className="panel-header">
         <h2>{date.format('MMMM D, YYYY')}</h2>
-        <Button label="✕" onClick={onClose} variant="ghost" />
+        <Button
+          label="✕"
+          onClick={() => onClose(body.trim().length > 0)}
+          variant="ghost"
+        />
       </div>
 
       <div className="panel-body">
@@ -75,14 +85,12 @@ const DatePanel = ({ date, onClose }: Props): ReactElement => {
                 ))}
               </select>
             ) : null}
-
             <textarea
               value={body}
               onChange={(e) => setBody(e.target.value)}
               rows={6}
-              placeholder="Write the prompt for this day..."
+              placeholder="Write a prompt for this day..."
             />
-
             <Button
               label={isSaving ? 'Saving...' : 'Save'}
               type="submit"

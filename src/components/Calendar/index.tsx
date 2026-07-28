@@ -31,9 +31,9 @@ const Calendar = (): ReactNode => {
   return (
     <div className="calendar-component">
       <div className="month-navigation">
-        <Button label="‹" onClick={goToPreviousMonth} variant="primary" />
+        <Button label="‹" onClick={goToPreviousMonth} variant="ghost" />
         <span>{currentMonth.format('MMMM YYYY')}</span>
-        <Button label="›" onClick={goToNextMonth} variant="secondary" />
+        <Button label="›" onClick={goToNextMonth} variant="ghost" />
       </div>
 
       <div className="calendar-grid calendar-weekdays">

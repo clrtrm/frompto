@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import type { ButtonHTMLAttributes, ReactElement } from 'react'
 import clsx from 'clsx'
 
 import './styles.scss'
@@ -16,7 +16,7 @@ const Button = ({
   label,
   variant = 'primary',
   ...rest
-}: Props): ReactNode => {
+}: Props): ReactElement => {
   const classes = clsx('button-component', className, {
     primary: variant == 'primary',
     secondary: variant == 'secondary',

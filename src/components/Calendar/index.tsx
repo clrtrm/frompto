@@ -1,13 +1,17 @@
 import dayjs from 'dayjs'
 import type { Dayjs } from 'dayjs'
 import { useState } from 'react'
-import type { ReactNode } from 'react'
+import type { ReactElement } from 'react'
+
+import Button from '~/components/Button'
+import DatePanel from '~/pages/Dashboard/DatePanel'
 
 import './styles.scss'
-import Button from '~/components/Button'
 
-const Calendar = (): ReactNode => {
+const Calendar = (): ReactElement => {
   const [currentMonth, setCurrentMonth] = useState<Dayjs>(dayjs())
+
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
 
   const startOfMonth = currentMonth.startOf('month')
   const daysInMonth = currentMonth.daysInMonth()
@@ -28,6 +32,10 @@ const Calendar = (): ReactNode => {
     setCurrentMonth((prev) => prev.add(1, 'month'))
   }
 
+  const handleDayClick = (day: number): void => {
+    setSelectedDate(currentMonth.date(day))
+  }
+
   return (
     <div className="calendar-component">
       <div className="month-navigation">
@@ -46,11 +54,18 @@ const Calendar = (): ReactNode => {
 
       <div className="calendar-grid">
         {days.map((day, index) => (
-          <div key={index} className="calendar-cell">
+          <div
+            key={index}
+            className="calendar-cell"
+            onClick={() => day && handleDayClick(day)}
+          >
             {day}
           </div>
         ))}
       </div>
+      {selectedDate ? (
+        <DatePanel date={selectedDate} onClose={() => setSelectedDate(null)} />
+      ) : null}
     </div>
   )
 }

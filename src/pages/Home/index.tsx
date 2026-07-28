@@ -4,15 +4,10 @@ import { apiFetch } from '~/api/client'
 import Button from '~/components/Button'
 import useAuth from '~/context/auth/useAuth'
 
-interface IPrompt {
-  id: number
-  body: string
-}
-
 interface IDailyPrompt {
   id: number
   date: string
-  prompt: IPrompt
+  body: string
 }
 
 const HomePage = (): ReactElement => {
@@ -47,7 +42,7 @@ const HomePage = (): ReactElement => {
       {loading ? (
         <p>Loading...</p>
       ) : dailyPrompt ? (
-        <p>{dailyPrompt.prompt.body}</p>
+        <p>{dailyPrompt.body}</p>
       ) : (
         <p>No prompt for today yet.</p>
       )}

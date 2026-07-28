@@ -1,0 +1,27 @@
+.date-panel-component {
+  background: $color-neutral-0;
+  border-left: 0.1rem solid $color-neutral-25;
+  bottom: 0;
+  box-shadow: -0.1rem 0 0.6rem $color-neutral-25;
+  height: 100%;
+  max-height: calc(100dvh - $navbar-height);
+  padding: $spacing-md;
+  position: fixed;
+  right: 0;
+  width: 40rem;
+
+  .panel-header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $spacing-md;
+  }
+
+  .panel-body {
+    &__form {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+    }
+  }
+}

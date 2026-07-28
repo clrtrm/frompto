@@ -2,6 +2,7 @@ import dayjs from 'dayjs'
 import type { Dayjs } from 'dayjs'
 import { useState } from 'react'
 import type { ReactElement } from 'react'
+import clsx from 'clsx'
 
 import Button from '~/components/Button'
 import DatePanel from '~/pages/Dashboard/DatePanel'
@@ -15,7 +16,7 @@ const Calendar = (): ReactElement => {
 
   const startOfMonth = currentMonth.startOf('month')
   const daysInMonth = currentMonth.daysInMonth()
-  const startWeekday = startOfMonth.day()
+  const startWeekday = (startOfMonth.day() + 6) % 7
 
   const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
@@ -53,15 +54,23 @@ const Calendar = (): ReactElement => {
       </div>
 
       <div className="calendar-grid">
-        {days.map((day, index) => (
-          <div
-            key={index}
-            className="calendar-cell"
-            onClick={() => day && handleDayClick(day)}
-          >
-            {day}
-          </div>
-        ))}
+        {days.map((day, index) => {
+          const date = day ? currentMonth.date(day) : null
+
+          const cellClasses = clsx('calendar-cell', {
+            'calendar-cell--past': date?.isBefore(dayjs(), 'day'),
+          })
+
+          return (
+            <div
+              key={index}
+              className={cellClasses}
+              onClick={() => day && handleDayClick(day)}
+            >
+              {day}
+            </div>
+          )
+        })}
       </div>
       {selectedDate ? (
         <DatePanel date={selectedDate} onClose={() => setSelectedDate(null)} />

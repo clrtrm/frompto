@@ -33,8 +33,36 @@
     aspect-ratio: 1 / 1;
     border: 0.1rem solid $color-neutral-25;
     border-radius: $radius-lg;
+    cursor: pointer;
     font-size: 0.85rem;
     padding: 0.6rem;
+
+    &--past {
+      /** Credits to Oscar Jite-Orimiono */
+      background-image: linear-gradient(
+        45deg,
+        $color-neutral-5 0%,
+        $color-neutral-5 10%,
+        $color-secondary-10 10%,
+        $color-secondary-10 20%,
+        $color-neutral-5 20%,
+        $color-neutral-5 30%,
+        $color-secondary-10 30%,
+        $color-secondary-10 40%,
+        $color-neutral-5 40%,
+        $color-neutral-5 50%,
+        $color-secondary-10 50%,
+        $color-secondary-10 60%,
+        $color-neutral-5 60%,
+        $color-neutral-5 70%,
+        $color-secondary-10 70%,
+        $color-secondary-10 80%,
+        $color-neutral-5 80%,
+        $color-neutral-5 90%,
+        $color-secondary-10 90%,
+        $color-secondary-10 100%
+      );
+    }
 
     &:empty {
       border-color: transparent;

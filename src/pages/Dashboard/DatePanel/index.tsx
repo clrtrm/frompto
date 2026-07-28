@@ -44,7 +44,7 @@ const DatePanel = ({ date, onClose }: Props): ReactElement => {
         fetchDailyPrompt(dateKey),
         fetchPrompts(),
       ])
-      setBody(dailyPrompt?.body ?? '')
+      setBody(dailyPrompt?.body || '')
       setPrompts(availablePrompts)
       setIsLoading(false)
     }

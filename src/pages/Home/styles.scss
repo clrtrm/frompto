@@ -25,5 +25,12 @@
     .peer-pressure {
       font-size: $font-size-sm;
     }
+
+    .reply-form {
+      display: flex;
+      flex-direction: column;
+      row-gap: $spacing-sm;
+      width: 40rem;
+    }
   }
 }

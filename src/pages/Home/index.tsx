@@ -1,10 +1,11 @@
 import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
-import type { ReactElement } from 'react'
+import type { ReactElement, SubmitEventHandler } from 'react'
 import { apiFetch } from '~/api/client'
 import Button from '~/components/Button'
 import useAuth from '~/context/auth/useAuth'
 import type { IDailyPrompt } from '~/types/dailyPrompt'
+import { createReply } from '~/api/replies'
 
 import './styles.scss'
 
@@ -14,7 +15,16 @@ const HomePage = (): ReactElement => {
   const [dailyPrompt, setDailyPrompt] = useState<IDailyPrompt | null>(null)
   const [loading, setLoading] = useState(true)
 
+  const [replyBody, setReplyBody] = useState<string>('')
+
   const repliesCount = dailyPrompt?.replies?.length || 0
+
+  /** Handlers */
+
+  const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault()
+    if (dailyPrompt) createReply(dailyPrompt.date, replyBody)
+  }
 
   /** Effects */
   useEffect(() => {
@@ -46,7 +56,17 @@ const HomePage = (): ReactElement => {
       ) : dailyPrompt ? (
         <div className="prompt-container">
           <span className="prompt-body">{dailyPrompt.body}</span>
-          <Button label="Answer now" />
+          <form className="reply-form" onSubmit={handleSubmit}>
+            <textarea
+              placeholder="Be loud and proud..."
+              onChange={(e) => setReplyBody(e.target.value)}
+              name="replyBody"
+              rows={6}
+              id=""
+              value={replyBody}
+            />
+            <Button label="Answer now" />
+          </form>
           <span className="peer-pressure">
             {repliesCount === 1
               ? '1 person has already replied'

@@ -2,9 +2,10 @@ import clsx from 'clsx'
 import dayjs from 'dayjs'
 import type { MouseEventHandler, ReactElement } from 'react'
 
+import './styles.scss'
+
 interface Props {
   date: dayjs.Dayjs | null
-  key: number
   textContent?: string
   day: number | null
   onClick: MouseEventHandler<HTMLElement>
@@ -13,22 +14,24 @@ interface Props {
 const CalendarCell = ({
   date,
   day,
-  key,
   textContent,
   onClick,
 }: Props): ReactElement => {
-  const classes = clsx('calendar-cell', {
-    'calendar-cell--past': date?.isBefore(dayjs(), 'day'),
-    'calendar-cell--assigned': !!textContent,
+  const classes = clsx('calendar-cell-component', {
+    'calendar-cell-component--has-day': !!day,
+    'calendar-cell-component--past': date?.isBefore(dayjs(), 'day'),
+    'calendar-cell-component--assigned': !!textContent,
   })
 
   return (
-    <div key={key} className={classes} onClick={onClick}>
+    <div className={classes} onClick={onClick}>
       {day ? (
         <>
-          <span className="calendar-cell__day-number">{day}</span>
+          <span className="calendar-cell-component__day">{day}</span>
           {textContent ? (
-            <span className="calendar-cell__prompt">{textContent}</span>
+            <span className="calendar-cell-component__prompt">
+              {textContent}
+            </span>
           ) : null}
         </>
       ) : null}

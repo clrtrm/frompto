@@ -1,19 +1,14 @@
 import { apiFetch } from '~/api/client'
+import type { IDailyPrompt } from '~/types/dailyPrompt'
 
-export type DailyPrompt = {
-  id: number
-  date: string
-  body: string
-}
-
-export const fetchDailyPrompts = async (): Promise<DailyPrompt[]> => {
+export const fetchDailyPrompts = async (): Promise<IDailyPrompt[]> => {
   const res = await apiFetch('/daily_prompts')
   return res.json()
 }
 
 export const fetchDailyPrompt = async (
   date: string,
-): Promise<DailyPrompt | null> => {
+): Promise<IDailyPrompt | null> => {
   const res = await apiFetch(`/daily_prompts/${date}`)
   if (res.status === 404) return null
   return res.json()
@@ -22,7 +17,7 @@ export const fetchDailyPrompt = async (
 export const upsertDailyPrompt = async (
   date: string,
   body: string,
-): Promise<DailyPrompt> => {
+): Promise<IDailyPrompt> => {
   const res = await apiFetch(`/daily_prompts/${date}`, {
     method: 'PATCH',
     body: JSON.stringify({ body }),

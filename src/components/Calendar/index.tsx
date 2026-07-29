@@ -43,11 +43,15 @@ const Calendar = (): ReactElement => {
     setSelectedDate(selectedMonth.date(day))
   }
 
-  const handlePanelClose = (dateKey: string, body: string): void => {
+  const handlePanelClose = (): void => {
     setSelectedDate(null)
+  }
+
+  const handlePanelSave = (dateKey: string, newPromptBody: string): void => {
+    handlePanelClose()
     setPromptsByDate((prev) => {
       const next = new Map(prev)
-      if (body) next.set(dateKey, body)
+      if (newPromptBody) next.set(dateKey, newPromptBody)
       else next.delete(dateKey)
       return next
     })
@@ -101,9 +105,10 @@ const Calendar = (): ReactElement => {
       {selectedDate ? (
         <DatePanel
           date={selectedDate}
-          onClose={(body) =>
-            handlePanelClose(selectedDate.format('YYYY-MM-DD'), body)
+          onSave={(body) =>
+            handlePanelSave(selectedDate.format('YYYY-MM-DD'), body)
           }
+          onClose={handlePanelClose}
         />
       ) : null}
     </div>

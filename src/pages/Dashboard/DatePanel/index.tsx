@@ -11,10 +11,15 @@ import './styles.scss'
 
 interface Props {
   date: Dayjs
-  onClose: (body: string) => void
+  onSave: (newPromptBody: string) => void
+  onClose: VoidFunction
 }
 
-const DatePanel = ({ date, onClose }: Props): ReactElement => {
+const DatePanel = ({
+  date,
+  onClose: handleClose,
+  onSave: handleSave,
+}: Props): ReactElement => {
   /** Hooks */
   const [body, setBody] = useState('')
   const [prompts, setPrompts] = useState<Prompt[]>([])
@@ -38,7 +43,7 @@ const DatePanel = ({ date, onClose }: Props): ReactElement => {
     const trimmedBody = body.trim()
     await upsertDailyPrompt(dateKey, trimmedBody)
     setIsSaving(false)
-    onClose(trimmedBody)
+    handleSave(trimmedBody)
   }
 
   /** Effects */
@@ -61,11 +66,7 @@ const DatePanel = ({ date, onClose }: Props): ReactElement => {
     <div className="date-panel-component">
       <div className="panel-header">
         <h2>{date.format('MMMM D, YYYY')}</h2>
-        <Button
-          label="✕"
-          onClick={() => onClose(body.trim())}
-          variant="ghost"
-        />
+        <Button label="✕" onClick={handleClose} variant="ghost" />
       </div>
 
       <div className="panel-body">

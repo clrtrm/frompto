@@ -1,0 +1,29 @@
+.home-page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+
+  .greeting {
+    color: $color-primary-40;
+    font-size: $font-size-lg;
+  }
+
+  .prompt-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: $spacing-lg;
+    row-gap: $spacing-lg;
+
+    .prompt-body {
+      font-size: $font-size-xl;
+      font-weight: 600;
+    }
+
+    .peer-pressure {
+      font-size: $font-size-sm;
+    }
+  }
+}

@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import type { Dayjs } from 'dayjs'
 import { useEffect, useState } from 'react'
 import type { ReactElement } from 'react'
-import clsx from 'clsx'
+import CalendarCell from './CalendarCell'
 
 import Button from '~/components/Button'
 import DatePanel from '~/pages/Dashboard/DatePanel'
@@ -87,26 +87,14 @@ const Calendar = (): ReactElement => {
           const dateKey = date?.format('YYYY-MM-DD')
           const promptBody = dateKey ? promptsByDate.get(dateKey) : undefined
 
-          const cellClasses = clsx('calendar-cell', {
-            'calendar-cell--past': date?.isBefore(dayjs(), 'day'),
-            'calendar-cell--assigned': !!promptBody,
-          })
-
           return (
-            <div
+            <CalendarCell
+              date={date}
               key={index}
-              className={cellClasses}
+              textContent={promptBody}
+              day={day}
               onClick={() => day && handleDayClick(day)}
-            >
-              {day ? (
-                <>
-                  <span className="calendar-cell__day-number">{day}</span>
-                  {promptBody ? (
-                    <span className="calendar-cell__prompt">{promptBody}</span>
-                  ) : null}
-                </>
-              ) : null}
-            </div>
+            />
           )
         })}
       </div>

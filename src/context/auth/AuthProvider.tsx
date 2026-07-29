@@ -58,7 +58,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     const data = await res.json()
 
     if (!res.ok) {
-      throw new Error(data.errors.join(', '))
+      throw new Error(data.error)
     }
 
     setUser(rebindUserFromSnakeCaseToCamelCase(data.user))
@@ -85,7 +85,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     const data = await res.json()
 
     if (!res.ok) {
-      throw new Error(data.errors.join(', '))
+      throw new Error(data.error)
     }
 
     setUser(rebindUserFromSnakeCaseToCamelCase(data.user))

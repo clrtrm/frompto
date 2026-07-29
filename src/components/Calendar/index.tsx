@@ -12,15 +12,15 @@ import './styles.scss'
 
 const Calendar = (): ReactElement => {
   /** Hooks */
-  const [currentMonth, setCurrentMonth] = useState<Dayjs>(dayjs())
+  const [selectedMonth, setSelectedMonth] = useState<Dayjs>(dayjs())
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
   const [promptsByDate, setPromptsByDate] = useState<Map<string, string>>(
     new Map(),
   )
 
   /** Local State */
-  const startOfMonth = currentMonth.startOf('month')
-  const daysInMonth = currentMonth.daysInMonth()
+  const startOfMonth = selectedMonth.startOf('month')
+  const daysInMonth = selectedMonth.daysInMonth()
   const startWeekday = (startOfMonth.day() + 6) % 7
 
   const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -32,15 +32,15 @@ const Calendar = (): ReactElement => {
 
   /** Handlers */
   const goToPreviousMonth = (): void => {
-    setCurrentMonth((prev) => prev.subtract(1, 'month'))
+    setSelectedMonth((prev) => prev.subtract(1, 'month'))
   }
 
   const goToNextMonth = (): void => {
-    setCurrentMonth((prev) => prev.add(1, 'month'))
+    setSelectedMonth((prev) => prev.add(1, 'month'))
   }
 
   const handleDayClick = (day: number): void => {
-    setSelectedDate(currentMonth.date(day))
+    setSelectedDate(selectedMonth.date(day))
   }
 
   const handlePanelClose = (dateKey: string, body: string): void => {
@@ -69,7 +69,7 @@ const Calendar = (): ReactElement => {
     <div className="calendar-component">
       <div className="month-navigation">
         <Button label="‹" onClick={goToPreviousMonth} variant="ghost" />
-        <span>{currentMonth.format('MMMM YYYY')}</span>
+        <span>{selectedMonth.format('MMMM YYYY')}</span>
         <Button label="›" onClick={goToNextMonth} variant="ghost" />
       </div>
 
@@ -83,7 +83,7 @@ const Calendar = (): ReactElement => {
 
       <div className="calendar-grid">
         {days.map((day, index) => {
-          const date = day ? currentMonth.date(day) : null
+          const date = day ? selectedMonth.date(day) : null
           const dateKey = date?.format('YYYY-MM-DD')
           const promptBody = dateKey ? promptsByDate.get(dateKey) : undefined
 

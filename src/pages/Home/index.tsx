@@ -76,6 +76,7 @@ const HomePage = (): ReactElement => {
           <span className="prompt-body">{dailyPrompt.body}</span>
           <Form errors={formErrors} onSubmit={handleSubmit}>
             <textarea
+              minLength={3}
               placeholder="Be loud and proud..."
               onChange={(e) => setReplyBody(e.target.value)}
               name="replyBody"

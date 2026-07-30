@@ -2,11 +2,15 @@ html {
   font-size: 10px;
   height: 100%;
 
+  body {
+    font-size: $font-size-md;
+  }
+
   * {
     box-sizing: border-box;
     font-family: $font-primary;
-    font-size: $font-size-md;
-    list-style: none;
+    font-size: inherit;
+    list-style-position: inside;
     margin: 0;
     padding: 0;
     text-decoration: none;

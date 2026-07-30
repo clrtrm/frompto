@@ -2,10 +2,15 @@ import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
 import type { ReactElement, SubmitEventHandler } from 'react'
 import { apiFetch } from '~/api/client'
-import Button from '~/components/Button'
 import useAuth from '~/context/auth/useAuth'
 import type { IDailyPrompt } from '~/types/dailyPrompt'
-import { createReply } from '~/api/replies'
+import {
+  createReply,
+  flattenCreateReplyErrors,
+  type IApiErrors,
+} from '~/api/replies'
+import Button from '~/components/Button'
+import Form from '~/components/Form'
 
 import './styles.scss'
 
@@ -14,16 +19,29 @@ const HomePage = (): ReactElement => {
   const { user } = useAuth()
   const [dailyPrompt, setDailyPrompt] = useState<IDailyPrompt | null>(null)
   const [loading, setLoading] = useState(true)
-
+  const [formErrors, setFormErrors] = useState<string[]>([])
   const [replyBody, setReplyBody] = useState<string>('')
 
   const repliesCount = dailyPrompt?.replies?.length || 0
 
   /** Handlers */
 
-  const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
+  const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
-    if (dailyPrompt) createReply(dailyPrompt.date, replyBody)
+
+    if (!dailyPrompt) return
+
+    try {
+      await createReply(dailyPrompt.date, replyBody)
+      setFormErrors([])
+    } catch (err) {
+      const apiErrors = err as IApiErrors
+      setFormErrors(
+        apiErrors?.errors
+          ? flattenCreateReplyErrors(apiErrors.errors)
+          : ['Something went wrong'],
+      )
+    }
   }
 
   /** Effects */
@@ -56,7 +74,7 @@ const HomePage = (): ReactElement => {
       ) : dailyPrompt ? (
         <div className="prompt-container">
           <span className="prompt-body">{dailyPrompt.body}</span>
-          <form className="reply-form" onSubmit={handleSubmit}>
+          <Form errors={formErrors} onSubmit={handleSubmit}>
             <textarea
               placeholder="Be loud and proud..."
               onChange={(e) => setReplyBody(e.target.value)}
@@ -65,8 +83,8 @@ const HomePage = (): ReactElement => {
               id=""
               value={replyBody}
             />
-            <Button label="Answer now" />
-          </form>
+            <Button label="Answer now" disabled={replyBody.trim().length < 3} />
+          </Form>
           <span className="peer-pressure">
             {repliesCount === 1
               ? '1 person has already replied'

@@ -25,7 +25,7 @@ const Button = ({
   })
 
   return (
-    <button className={classes} {...rest}>
+    <button className={classes} disabled={disabled} {...rest}>
       {label}
     </button>
   )

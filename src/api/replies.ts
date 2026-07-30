@@ -1,5 +1,17 @@
 import { apiFetch } from '~/api/client'
 import type { IReply } from '~/types/reply'
+import { capitalize } from '~/utils/string'
+
+export interface IApiErrors {
+  errors: Record<string, string[]>
+}
+
+export const flattenCreateReplyErrors = (
+  errors: Record<string, string[]>,
+): string[] =>
+  Object.entries(errors).flatMap(([field, messages]) =>
+    messages.map((message) => `${capitalize(field)} ${message}`),
+  )
 
 export const createReply = async (
   date: string,
@@ -9,5 +21,12 @@ export const createReply = async (
     method: 'POST',
     body: JSON.stringify({ reply: { body } }),
   })
-  return res.json()
+
+  const data = (await res.json()) as unknown
+
+  if (!res.ok) {
+    throw data as IApiErrors
+  }
+
+  return data as IReply
 }

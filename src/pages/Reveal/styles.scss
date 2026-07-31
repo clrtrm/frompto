@@ -1,0 +1,39 @@
+.reveal-page {
+  height: 100%;
+
+  .prompt-body {
+    font-size: 4rem;
+    font-weight: 600;
+  }
+
+  .replies-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: $spacing-lg;
+    max-width: 90rem;
+    row-gap: $spacing-md;
+
+    .reply {
+      background-color: $color-primary-10;
+      border-radius: $radius-lg;
+      display: flex;
+      flex-direction: column;
+      padding: $spacing-sm;
+
+      .author-names {
+        align-items: center;
+        column-gap: $spacing-xs;
+        display: flex;
+
+        &__display-name {
+          font-weight: 600;
+        }
+
+        &__username {
+          color: $color-neutral-5;
+          font-size: $font-size-sm;
+        }
+      }
+    }
+  }
+}

@@ -9,6 +9,7 @@ import NotFoundPage from '~/pages/NotFound'
 import RootPage from '~/pages/RootPage'
 import DashboardPage from '~/pages/Dashboard'
 import SignUp from '~/pages/Auth/SignUp'
+import RevealPage from './pages/Reveal'
 
 const App = (): ReactElement => {
   return (
@@ -21,6 +22,7 @@ const App = (): ReactElement => {
         </Route>
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/reveal/:date" element={<RevealPage />} />
           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
             <Route path="/dashboard" element={<DashboardPage />} />
           </Route>

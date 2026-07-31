@@ -80,6 +80,10 @@ const HomePage = (): ReactElement => {
           <span className="prompt-body">{dailyPrompt.body}</span>
           {reply ? (
             <div className="reply-container">
+              <p className="come-back">
+                You answered! Come back at 10am tomorrow to see what everyone
+                said.
+              </p>
               <span className="reply-body">{reply.body}</span>
             </div>
           ) : (

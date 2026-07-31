@@ -23,8 +23,17 @@
     }
 
     .reply-container {
-      background-color: papayawhip;
-      padding: $spacing-md;
+      display: flex;
+      flex-direction: column;
+
+      .reply-body {
+        background-color: papayawhip;
+        padding: $spacing-md;
+      }
+
+      .come-back {
+        font-size: $font-size-sm;
+      }
     }
   }
 }

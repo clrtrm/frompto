@@ -15,8 +15,6 @@ const Form = ({
 }: Props): ReactElement => {
   const classes = clsx('form-component', className)
 
-  console.log(errors)
-
   return (
     <form className={classes} {...rest}>
       {errors.length > 0 ? (

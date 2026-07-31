@@ -1,4 +1,4 @@
-import type { IReply } from './reply'
+import type { IReply } from '~/types/reply'
 
 export interface IDailyPrompt {
   id: number

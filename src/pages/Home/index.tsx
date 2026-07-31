@@ -25,8 +25,6 @@ const HomePage = (): ReactElement => {
   const [formErrors, setFormErrors] = useState<string[]>([])
   const [replyBody, setReplyBody] = useState<string>('')
 
-  // const repliesCount = dailyPrompt?.replies?.length || 0
-
   /** Handlers */
 
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
@@ -101,13 +99,6 @@ const HomePage = (): ReactElement => {
               />
             </Form>
           )}
-          {/* <span className="peer-pressure">
-            {repliesCount === 1
-              ? '1 person has already replied'
-              : repliesCount > 1
-                ? `${repliesCount} have already replied`
-                : 'Nobody has replied yet. Be the first! 👀'}
-          </span> */}
         </div>
       ) : (
         <p>No prompt for today yet.</p>

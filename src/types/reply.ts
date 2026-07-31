@@ -1,4 +1,4 @@
-import type { IUser } from './auth'
+import type { IUser } from '~/types/auth'
 
 export interface IReply {
   id: number

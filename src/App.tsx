@@ -22,7 +22,7 @@ const App = (): ReactElement => {
         </Route>
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/reveal/:date" element={<RevealPage />} />
+          <Route path="/reveals/:date" element={<RevealPage />} />
           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
             <Route path="/dashboard" element={<DashboardPage />} />
           </Route>

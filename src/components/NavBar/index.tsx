@@ -3,6 +3,7 @@ import useAuth from '~/context/auth/useAuth'
 import { NavLink, useNavigate } from 'react-router-dom'
 import type { TUserRole } from '~/types/auth'
 import Button from '~/components/Button'
+import dayjs from 'dayjs'
 
 import './styles.scss'
 
@@ -13,8 +14,11 @@ type TNavigationLocation = {
   scope?: TUserRole[]
 }
 
+const YESTERDAY = dayjs(new Date()).subtract(1, 'day').format('YYYY-MM-DD')
+
 const NAVIGATION_LOCATION: TNavigationLocation[] = [
   { label: 'Profile', path: '/profile' },
+  { label: 'Reveals', path: `/reveals/${YESTERDAY}` },
   { label: 'Dashboard', path: '/dashboard', scope: ['admin'] },
 ]
 

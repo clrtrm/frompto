@@ -6,6 +6,7 @@
   &__errors {
     border: 0.2rem dashed $color-error-100;
     font-size: $font-size-sm;
+    list-style: disc;
     margin-bottom: $spacing-sm;
     padding: $spacing-xs $spacing-md;
 

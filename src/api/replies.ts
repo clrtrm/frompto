@@ -30,3 +30,17 @@ export const createReply = async (
 
   return data as IReply
 }
+
+export const fetchReply = async (date: string): Promise<IReply | null> => {
+  const res = await apiFetch(`/daily_prompts/${date}/reply`)
+
+  if (res.status === 404) return null
+
+  const data = (await res.json()) as unknown
+
+  if (!res.ok) {
+    throw data as IApiErrors
+  }
+
+  return data as IReply | null
+}

@@ -22,8 +22,13 @@
       font-weight: 600;
     }
 
-    .peer-pressure {
-      font-size: $font-size-sm;
+    .reply-container {
+      background-color: papayawhip;
+      padding: $spacing-md;
     }
+
+    // .peer-pressure {
+    //   font-size: $font-size-sm;
+    // }
   }
 }

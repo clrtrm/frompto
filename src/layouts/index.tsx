@@ -6,7 +6,7 @@ import useDocumentTitle from '~/hooks/useDocumentTitle'
 import './styles.scss'
 
 const Layout = (): ReactElement => {
-  useDocumentTitle('Prompto: Cozy Check-ins with Strangers')
+  useDocumentTitle('Cozy Check-ins with Strangers')
 
   return (
     <div className="layout">

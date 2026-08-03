@@ -3,6 +3,7 @@ import type { SubmitEventHandler } from 'react'
 import useAuth from '~/context/auth/useAuth'
 import FormField from '~/components/auth/FormField'
 import { useNavigate } from 'react-router-dom'
+import useDocumentTitle from '~/hooks/useDocumentTitle'
 
 const SignUp = () => {
   const [email, setEmail] = useState('')
@@ -10,6 +11,8 @@ const SignUp = () => {
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const [formError, setFormError] = useState('')
+
+  useDocumentTitle('Sign up')
 
   const { signUp } = useAuth()
 

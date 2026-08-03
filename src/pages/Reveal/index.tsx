@@ -7,11 +7,14 @@ import { ISO_DATE_REGEX } from '~/const'
 import { fetchReveal } from '~/api/reveals'
 import type { IReveal } from '~/types/reveal'
 import type { RevealResult } from '~/api/reveals'
+import useDocumentTitle from '~/hooks/useDocumentTitle'
 
 import './styles.scss'
 
 const RevealPage = (): ReactElement => {
   /** Hooks */
+  useDocumentTitle('La Place du Village')
+
   const { date } = useParams<{ date: string }>()
 
   /** Local state */

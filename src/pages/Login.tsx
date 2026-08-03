@@ -4,11 +4,14 @@ import useAuth from '~/context/auth/useAuth'
 import FormField from '~/components/auth/FormField'
 import { useNavigate } from 'react-router-dom'
 import Button from '~/components/Button'
+import useDocumentTitle from '~/hooks/useDocumentTitle'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [formError, setFormError] = useState('')
+
+  useDocumentTitle('Sign in')
 
   const { login } = useAuth()
 

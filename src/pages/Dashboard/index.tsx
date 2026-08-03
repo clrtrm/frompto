@@ -1,9 +1,12 @@
 import type { ReactElement } from 'react'
 import Calendar from '~/components/Calendar'
+import useDocumentTitle from '~/hooks/useDocumentTitle'
 
 import './styles.scss'
 
 const DashboardPage = (): ReactElement => {
+  useDocumentTitle('Admin dashboard')
+
   return (
     <div className="dashboard-page">
       <h1 className="page-title">Admin dashboard</h1>

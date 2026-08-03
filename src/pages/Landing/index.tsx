@@ -1,8 +1,11 @@
 import type { ReactElement } from 'react'
+import useDocumentTitle from '~/hooks/useDocumentTitle'
 
 import './styles.scss'
 
 const LandingPage = (): ReactElement => {
+  useDocumentTitle('Cozy Check-ins with Strangers')
+
   return (
     <div className="page landing-page">
       <div className="title-and-pitch">

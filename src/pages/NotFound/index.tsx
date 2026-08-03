@@ -1,6 +1,8 @@
-import type { ReactElement } from 'react'
 import { Link } from 'react-router-dom'
+
 import useDocumentTitle from '~/hooks/useDocumentTitle'
+
+import type { ReactElement } from 'react'
 
 const NotFoundPage = (): ReactElement => {
   useDocumentTitle('Oh no >:{')

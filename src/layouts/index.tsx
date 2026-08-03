@@ -1,7 +1,9 @@
 import { Outlet } from 'react-router-dom'
-import type { ReactElement } from 'react'
+
 import NavBar from '~/components/NavBar'
 import useDocumentTitle from '~/hooks/useDocumentTitle'
+
+import type { ReactElement } from 'react'
 
 import './styles.scss'
 

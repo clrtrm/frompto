@@ -1,6 +1,7 @@
-import type { ReactElement } from 'react'
 import Calendar from '~/components/Calendar'
 import useDocumentTitle from '~/hooks/useDocumentTitle'
+
+import type { ReactElement } from 'react'
 
 import './styles.scss'
 

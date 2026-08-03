@@ -1,6 +1,7 @@
 import { apiFetch } from '~/api/client'
-import type { IReply } from '~/types/reply'
 import { capitalize } from '~/utils/string'
+
+import type { IReply } from '~/types/reply'
 
 export interface IApiErrors {
   errors: Record<string, string[]>

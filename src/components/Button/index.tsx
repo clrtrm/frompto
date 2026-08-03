@@ -1,5 +1,6 @@
-import type { ButtonHTMLAttributes, ReactElement } from 'react'
 import clsx from 'clsx'
+
+import type { ButtonHTMLAttributes, ReactElement } from 'react'
 
 import './styles.scss'
 

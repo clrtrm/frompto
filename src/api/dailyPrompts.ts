@@ -1,4 +1,5 @@
 import { apiFetch } from '~/api/client'
+
 import type { IDailyPrompt } from '~/types/dailyPrompt'
 
 export const fetchDailyPrompts = async (): Promise<IDailyPrompt[]> => {

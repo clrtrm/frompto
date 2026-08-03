@@ -1,5 +1,6 @@
-import type { FormHTMLAttributes, PropsWithChildren, ReactElement } from 'react'
 import clsx from 'clsx'
+
+import type { FormHTMLAttributes, PropsWithChildren, ReactElement } from 'react'
 
 import './styles.scss'
 

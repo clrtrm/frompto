@@ -1,9 +1,11 @@
-import type { ReactElement } from 'react'
-import useAuth from '~/context/auth/useAuth'
 import { NavLink, useNavigate } from 'react-router-dom'
-import type { TUserRole } from '~/types/auth'
-import Button from '~/components/Button'
 import dayjs from 'dayjs'
+
+import Button from '~/components/Button'
+import useAuth from '~/context/auth/useAuth'
+
+import type { TUserRole } from '~/types/auth'
+import type { ReactElement } from 'react'
 
 import './styles.scss'
 

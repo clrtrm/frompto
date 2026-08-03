@@ -1,9 +1,12 @@
-import { useState, useEffect } from 'react'
-import type { PropsWithChildren } from 'react'
+import { useEffect, useState } from 'react'
+
 import { apiFetch, getAuthToken, setAuthToken } from '~/api/client'
-import type { IUser, TUserRole } from '~/types/auth'
+
 import { AuthContext } from './AuthContext'
+
 import type { ISignInParams, ISignUpParams } from './AuthContext'
+import type { IUser, TUserRole } from '~/types/auth'
+import type { PropsWithChildren } from 'react'
 
 interface IUserFromResponse {
   id: string

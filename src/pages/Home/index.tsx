@@ -1,18 +1,20 @@
-import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
-import type { ReactElement, SubmitEventHandler } from 'react'
+import dayjs from 'dayjs'
+
 import { apiFetch } from '~/api/client'
-import useAuth from '~/context/auth/useAuth'
-import type { IDailyPrompt } from '~/types/dailyPrompt'
-import type { IReply } from '~/types/reply'
 import {
   createReply,
   fetchReply,
   flattenCreateReplyErrors,
 } from '~/api/replies'
-import type { IApiErrors } from '~/api/replies'
 import Button from '~/components/Button'
 import Form from '~/components/Form'
+import useAuth from '~/context/auth/useAuth'
+
+import type { IApiErrors } from '~/api/replies'
+import type { IDailyPrompt } from '~/types/dailyPrompt'
+import type { IReply } from '~/types/reply'
+import type { ReactElement, SubmitEventHandler } from 'react'
 
 import './styles.scss'
 

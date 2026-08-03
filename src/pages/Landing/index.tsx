@@ -1,5 +1,6 @@
-import type { ReactElement } from 'react'
 import useDocumentTitle from '~/hooks/useDocumentTitle'
+
+import type { ReactElement } from 'react'
 
 import './styles.scss'
 

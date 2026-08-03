@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import type { SubmitEventHandler } from 'react'
-import useAuth from '~/context/auth/useAuth'
-import FormField from '~/components/auth/FormField'
 import { useNavigate } from 'react-router-dom'
+
+import FormField from '~/components/auth/FormField'
+import useAuth from '~/context/auth/useAuth'
 import useDocumentTitle from '~/hooks/useDocumentTitle'
+
+import type { SubmitEventHandler } from 'react'
 
 const SignUp = () => {
   const [email, setEmail] = useState('')

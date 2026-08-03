@@ -1,15 +1,18 @@
-import type { ReactElement } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import Layout from '~/layouts'
-import Login from '~/pages/Login'
-import ProfilePage from '~/pages/Profile'
-import ProtectedRoute from '~/components/ProtectedRoute'
+import { Route, Routes } from 'react-router-dom'
+
 import GuestRoute from '~/components/GuestRoute'
-import NotFoundPage from '~/pages/NotFound'
-import RootPage from '~/pages/RootPage'
-import DashboardPage from '~/pages/Dashboard'
+import ProtectedRoute from '~/components/ProtectedRoute'
+import Layout from '~/layouts'
 import SignUp from '~/pages/Auth/SignUp'
+import DashboardPage from '~/pages/Dashboard'
+import Login from '~/pages/Login'
+import NotFoundPage from '~/pages/NotFound'
+import ProfilePage from '~/pages/Profile'
+import RootPage from '~/pages/RootPage'
+
 import RevealPage from './pages/Reveal'
+
+import type { ReactElement } from 'react'
 
 const App = (): ReactElement => {
   return (

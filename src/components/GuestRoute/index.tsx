@@ -1,6 +1,8 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import type { ReactElement } from 'react'
+
 import useAuth from '~/context/auth/useAuth'
+
+import type { ReactElement } from 'react'
 
 const GuestRoute = (): ReactElement => {
   const { user, loading } = useAuth()

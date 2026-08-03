@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
-import type { ReactElement } from 'react'
 import { useParams } from 'react-router-dom'
 
-import NotFoundPage from '~/pages/NotFound'
-import { ISO_DATE_REGEX } from '~/const'
 import { fetchReveal } from '~/api/reveals'
-import type { IReveal } from '~/types/reveal'
-import type { RevealResult } from '~/api/reveals'
+import { ISO_DATE_REGEX } from '~/const'
 import useDocumentTitle from '~/hooks/useDocumentTitle'
+import NotFoundPage from '~/pages/NotFound'
+
+import type { RevealResult } from '~/api/reveals'
+import type { IReveal } from '~/types/reveal'
+import type { ReactElement } from 'react'
 
 import './styles.scss'
 

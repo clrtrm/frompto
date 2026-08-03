@@ -5,6 +5,7 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 import prettier from 'eslint-config-prettier'
+import simpleImportSort from 'eslint-plugin-simple-import-sort'
 
 export default defineConfig([
   globalIgnores(['dist']),
@@ -18,6 +19,31 @@ export default defineConfig([
     ],
     languageOptions: {
       globals: globals.browser,
+    },
+    plugins: {
+      'simple-import-sort': simpleImportSort,
+    },
+    rules: {
+      'simple-import-sort/imports': [
+        'error',
+        {
+          groups: [
+            // Side effect imports
+            ['^\\u0000'],
+            // React and external packages
+            ['^react', '^[a-z]'],
+            // Internal aliased imports (~/...)
+            ['^~/'],
+            // Relative imports
+            ['^\\.'],
+            // Type imports
+            ['^.*\\u0000$'],
+            // Style imports
+            ['^.+\\.s?css$'],
+          ],
+        },
+      ],
+      'simple-import-sort/exports': 'error',
     },
   },
   prettier,

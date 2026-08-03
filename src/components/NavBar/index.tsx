@@ -65,7 +65,7 @@ const NavBar = (): ReactElement => {
           {user ? (
             <div className="auth-actions auth-actions--authenticated">
               <p className="user-greeting">
-                Hello, {user.displayName || user.username}!
+                Hello, {user.displayNameOrUsername}!
               </p>
               <Button label="Sign out" onClick={handleLogout} />
             </div>

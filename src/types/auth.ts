@@ -2,8 +2,11 @@ export type TUserRole = 'admin' | 'member'
 
 export interface IUser {
   id: string
+  createdAt: string
+  displayName: string | null
+  displayNameOrUsername: string
   email: string
-  username: string
-  displayName: string
   role: TUserRole
+  updatedAt: string
+  username: string
 }

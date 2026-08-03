@@ -71,7 +71,9 @@ const HomePage = (): ReactElement => {
   /** Render */
   return (
     <div className="page home-page">
-      <span className="greeting">Welcome back, {user?.displayName}</span>
+      <span className="greeting">
+        Welcome back, {user?.displayNameOrUsername}
+      </span>
       <span className="today-date">
         {dayjs().format('dddd MMMM DD, YYYY')}:
       </span>

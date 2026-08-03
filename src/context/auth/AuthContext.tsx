@@ -17,7 +17,7 @@ interface IAuthContext {
   user: IUser | null
   loading: boolean
   login: (params: ISignInParams) => Promise<void>
-  signUp: (params: ISignUpParams) => Promise<void>
+  signUp: (params: ISignUpParams) => Promise<string>
   logout: () => Promise<void>
 }
 

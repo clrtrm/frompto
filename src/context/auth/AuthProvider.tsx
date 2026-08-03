@@ -73,7 +73,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     setUser(null)
   }
 
-  const signUp = async (user: ISignUpParams) => {
+  const signUp = async (user: ISignUpParams): Promise<string> => {
     const res = await apiFetch('/signup', {
       method: 'POST',
       body: JSON.stringify({
@@ -88,10 +88,10 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     const data = await res.json()
 
     if (!res.ok) {
-      throw new Error(data.error)
+      throw new Error(data.errors?.[0] ?? data.error ?? 'Sign up failed.')
     }
 
-    setUser(rebindUserFromSnakeCaseToCamelCase(data.user))
+    return data.message
   }
 
   return (

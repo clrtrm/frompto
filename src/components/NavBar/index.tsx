@@ -64,7 +64,9 @@ const NavBar = (): ReactElement => {
           <ul className="nav-links">{navLinks}</ul>
           {user ? (
             <div className="auth-actions auth-actions--authenticated">
-              <p className="user-greeting">Hello, {user.displayName}!</p>
+              <p className="user-greeting">
+                Hello, {user.displayName || user.username}!
+              </p>
               <Button label="Sign out" onClick={handleLogout} />
             </div>
           ) : (

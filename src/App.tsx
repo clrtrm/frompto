@@ -4,13 +4,13 @@ import GuestRoute from '~/components/GuestRoute'
 import ProtectedRoute from '~/components/ProtectedRoute'
 import Layout from '~/layouts'
 import SignUp from '~/pages/Auth/SignUp'
+import ConfirmEmailPage from '~/pages/ConfirmEmail'
 import DashboardPage from '~/pages/Dashboard'
 import Login from '~/pages/Login'
 import NotFoundPage from '~/pages/NotFound'
 import ProfilePage from '~/pages/Profile'
+import RevealPage from '~/pages/Reveal'
 import RootPage from '~/pages/RootPage'
-
-import RevealPage from './pages/Reveal'
 
 import type { ReactElement } from 'react'
 
@@ -22,6 +22,7 @@ const App = (): ReactElement => {
         <Route element={<GuestRoute />}>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/confirm-email" element={<ConfirmEmailPage />}></Route>
         </Route>
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<ProfilePage />} />

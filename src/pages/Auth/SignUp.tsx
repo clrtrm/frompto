@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import FormField from '~/components/auth/FormField'
 import useAuth from '~/context/auth/useAuth'
@@ -8,18 +7,19 @@ import useDocumentTitle from '~/hooks/useDocumentTitle'
 import type { SubmitEventHandler } from 'react'
 
 const SignUp = () => {
+  /** Hooks */
+  useDocumentTitle('Sign up')
+  const { signUp } = useAuth()
+
+  /** Local State */
   const [email, setEmail] = useState('')
   const [displayName, setDisplayName] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const [formError, setFormError] = useState('')
+  const [successMessage, setSuccessMessage] = useState('')
 
-  useDocumentTitle('Sign up')
-
-  const { signUp } = useAuth()
-
-  const navigate = useNavigate()
-
+  /** Handlers */
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
 
@@ -29,8 +29,9 @@ const SignUp = () => {
     }
 
     try {
-      await signUp({ email, password, displayName })
-      navigate('/')
+      const message = await signUp({ email, password, displayName })
+      setFormError('')
+      setSuccessMessage(message)
     } catch (e: unknown) {
       setFormError(
         e instanceof Error
@@ -40,7 +41,16 @@ const SignUp = () => {
     }
   }
 
-  return (
+  /** Render */
+  return successMessage ? (
+    <div className="signup-success">
+      <h1>Almost there!</h1>
+      <p>
+        Signed up successfully! Please check your inbox and confirm your email
+        to activate your account.
+      </p>
+    </div>
+  ) : (
     <form onSubmit={handleSubmit}>
       <h1>Create a new account</h1>
       {formError ? <div className="form-errors">{formError}</div> : null}
@@ -48,10 +58,11 @@ const SignUp = () => {
         autoComplete="username"
         id="email"
         label="Email"
-        type="email"
-        value={email}
         onChange={setEmail}
         placeholder="Your email"
+        required
+        type="email"
+        value={email}
       />
       <FormField
         autoComplete="off"
@@ -65,18 +76,24 @@ const SignUp = () => {
         autoComplete="new-password"
         id="password"
         label="Password"
-        type="password"
-        value={password}
+        maxLength={128}
+        minLength={6}
         onChange={setPassword}
         placeholder="Your password"
+        required
+        type="password"
+        value={password}
       />
       <FormField
         id="password_confirmation"
         label="Password confirmation"
-        type="password"
-        value={passwordConfirmation}
+        maxLength={128}
+        minLength={6}
         onChange={setPasswordConfirmation}
         placeholder="Confirm your password"
+        required
+        type="password"
+        value={passwordConfirmation}
       />
       <button type="submit">Sign up</button>
     </form>

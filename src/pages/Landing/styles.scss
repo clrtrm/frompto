@@ -1,0 +1,21 @@
+.landing-page {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+
+  .title-and-pitch {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    .page-title {
+      font-size: 4rem;
+    }
+
+    .app-pitch {
+      font-size: $font-size-xl;
+    }
+  }
+}

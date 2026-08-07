@@ -9,16 +9,16 @@ const LandingPage = (): ReactElement => {
   useDocumentTitle('Cozy Check-ins with Strangers')
 
   return (
-    <div className="page landing-page">
-      <div className="title-and-pitch">
-        <PageTitle textContent="Prompto" />
-        <span className="app-pitch">
+    <div className="landing-page">
+      <PageTitle textContent="Prompto" />
+      <div className="page-main-container">
+        <p className="page-main-container__app-pitch">
           New question, every morning, 10am sharp.
           <br />
           You've got 24 hours to answer before the big reveal.
           <br />
           Show up daily, get a little less stranger-y.
-        </span>
+        </p>
       </div>
     </div>
   )

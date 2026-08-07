@@ -1,5 +1,7 @@
 import type { InputHTMLAttributes } from 'react'
 
+import './styles.scss'
+
 interface Props extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
   'onChange'
@@ -25,18 +27,19 @@ const FormField = ({
   value,
   ...rest
 }: Props) => (
-  <li>
-    <label htmlFor={id}>
+  <li className="form-field-component">
+    <label className="form-field-component__label" htmlFor={id}>
       {label}
       {required && '*'}
     </label>
     <input
       autoComplete={autoComplete}
+      className="form-field-component__input"
       id={id}
       name={id}
-      required={required}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
+      required={required}
       type={type}
       value={value}
       {...rest}

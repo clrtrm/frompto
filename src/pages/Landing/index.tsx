@@ -1,3 +1,4 @@
+import PageTitle from '~/components/PageTitle'
 import useDocumentTitle from '~/hooks/useDocumentTitle'
 
 import type { ReactElement } from 'react'
@@ -10,7 +11,7 @@ const LandingPage = (): ReactElement => {
   return (
     <div className="page landing-page">
       <div className="title-and-pitch">
-        <h1 className="page-title">Prompto</h1>
+        <PageTitle textContent="Prompto" />
         <span className="app-pitch">
           New question, every morning, 10am sharp.
           <br />

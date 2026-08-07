@@ -1,0 +1,9 @@
+.form-field-component {
+  display: flex;
+  flex-direction: column;
+  row-gap: $spacing-xs;
+
+  &__label {
+    font-weight: 500;
+  }
+}

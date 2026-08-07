@@ -46,18 +46,20 @@ const Login = () => {
           <FormField
             id="email"
             label="Email"
-            type="email"
-            value={email}
             onChange={setEmail}
             placeholder="Email"
+            required
+            type="email"
+            value={email}
           />
           <FormField
             id="password"
             label="Password"
-            type="password"
-            value={password}
             onChange={setPassword}
             placeholder="Password"
+            required
+            type="password"
+            value={password}
           />
           <Button label="Log in" type="submit" />
         </form>

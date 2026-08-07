@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
 import { apiFetch } from '~/api/client'
+import CustomLink from '~/components/Link'
+import PageTitle from '~/components/PageTitle'
 
 import type { ReactElement } from 'react'
+
+import './styles.scss'
 
 type Status = 'confirming' | 'success' | 'error'
 
@@ -50,19 +54,26 @@ const ConfirmEmail = (): ReactElement => {
   /** Render */
   return (
     <div className="confirm-email-page">
-      {status === 'confirming' ? <p>Confirming your email…</p> : null}
+      {status === 'confirming' ? (
+        <>
+          <PageTitle textContent="Confirming your email..." />
+          <p>🏃🏃🏃</p>
+        </>
+      ) : null}
 
       {status === 'success' ? (
         <>
+          <PageTitle textContent="Success!" />
           <p>Your email has been confirmed!</p>
-          <Link to="/login">Log in</Link>
+          <CustomLink to="/login">Log in</CustomLink>
         </>
       ) : null}
 
       {status === 'error' ? (
         <>
-          <p>{errorMessage}</p>
-          <Link to="/login">Back to login</Link>
+          <PageTitle textContent="Uh oh..." />
+          <p>{errorMessage}.</p>
+          <CustomLink to="/login">Back to login</CustomLink>
         </>
       ) : null}
     </div>

@@ -19,18 +19,12 @@ const SignUp = () => {
   const [email, setEmail] = useState('')
   const [displayName, setDisplayName] = useState('')
   const [password, setPassword] = useState('')
-  const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const [formError, setFormError] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
 
   /** Handlers */
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
-
-    if (password !== passwordConfirmation) {
-      setFormError('Passwords must match')
-      return
-    }
 
     try {
       const message = await signUp({ email, password, displayName })
@@ -49,13 +43,15 @@ const SignUp = () => {
   return (
     <div className="sign-up-page">
       {successMessage ? (
-        <div className="signup-success">
+        <>
           <PageTitle textContent="Almost there" />
-          <p>
-            Signed up successfully! Please check your inbox and confirm your
-            email to activate your account.
-          </p>
-        </div>
+          <div className="success-message">
+            <p>
+              Signed up successfully! <br /> Please check your inbox and confirm
+              your email to activate your account.
+            </p>
+          </div>
+        </>
       ) : (
         <>
           <PageTitle textContent="Create a new account" />
@@ -93,17 +89,6 @@ const SignUp = () => {
                 required
                 type="password"
                 value={password}
-              />
-              <FormField
-                id="password_confirmation"
-                label="Password confirmation"
-                maxLength={128}
-                minLength={6}
-                onChange={setPasswordConfirmation}
-                placeholder="Confirm your password"
-                required
-                type="password"
-                value={passwordConfirmation}
               />
               <Button label="Sign up" type="submit" />
             </form>

@@ -18,6 +18,19 @@ html {
     text-decoration: none;
   }
 
+  a {
+    font-weight: 600;
+    transition: filter 0.1s ease;
+
+    &:hover {
+      filter: brightness(1.4);
+    }
+
+    &:active {
+      filter: brightness(2);
+    }
+  }
+
   #root {
     height: 100dvh;
   }

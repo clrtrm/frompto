@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
 import { apiFetch } from '~/api/client'
-import CustomLink from '~/components/Link'
 import PageTitle from '~/components/PageTitle'
 
 import type { ReactElement } from 'react'
@@ -65,7 +64,7 @@ const ConfirmEmail = (): ReactElement => {
         <>
           <PageTitle textContent="Success!" />
           <p>Your email has been confirmed!</p>
-          <CustomLink to="/login">Log in</CustomLink>
+          <Link to="/login">Log in</Link>
         </>
       ) : null}
 
@@ -73,7 +72,7 @@ const ConfirmEmail = (): ReactElement => {
         <>
           <PageTitle textContent="Uh oh..." />
           <p>{errorMessage}.</p>
-          <CustomLink to="/login">Back to login</CustomLink>
+          <Link to="/login">Back to login</Link>
         </>
       ) : null}
     </div>

@@ -17,7 +17,7 @@ const NotFoundPage = (): ReactElement => {
       <PageTitle textContent="Not found" />
       <p>
         The requested resource could not be found. <br />
-        Please check your spelling or
+        Please check your spelling in the URL or
         <a href={gitHubURL}> reach out to us</a> if you believe something's on
         our side!
       </p>

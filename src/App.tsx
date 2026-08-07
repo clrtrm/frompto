@@ -3,10 +3,10 @@ import { Route, Routes } from 'react-router-dom'
 import GuestRoute from '~/components/GuestRoute'
 import ProtectedRoute from '~/components/ProtectedRoute'
 import Layout from '~/layouts'
-import SignUp from '~/pages/Auth/SignUp'
+import SignUpPage from '~/pages/Auth/SignUp'
 import ConfirmEmailPage from '~/pages/ConfirmEmail'
 import DashboardPage from '~/pages/Dashboard'
-import Login from '~/pages/Login'
+import LoginPage from '~/pages/Login'
 import NotFoundPage from '~/pages/NotFound'
 import ProfilePage from '~/pages/Profile'
 import RevealPage from '~/pages/Reveal'
@@ -20,9 +20,9 @@ const App = (): ReactElement => {
       <Route element={<Layout />}>
         <Route index element={<RootPage />} />
         <Route element={<GuestRoute />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/confirm-email" element={<ConfirmEmailPage />}></Route>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/confirm-email" element={<ConfirmEmailPage />} />
         </Route>
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<ProfilePage />} />

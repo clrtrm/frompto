@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
-import { fetchDailyPrompt, upsertDailyPrompt } from '~/api/dailyPrompts'
-import { fetchPrompts } from '~/api/prompts'
+import { upsertDailyPrompt } from '~/api/dailyPrompts'
 import Button from '~/components/Button'
+import useDailyPromptEditor from '~/hooks/useDailyPromptEditor'
 
 import type { Prompt } from '~/api/prompts'
 import type { Dayjs } from 'dayjs'
@@ -22,17 +22,18 @@ const DatePanel = ({
   onSave: handleSave,
 }: Props): ReactElement => {
   /** Hooks */
-  const [body, setBody] = useState('')
-  const [prompts, setPrompts] = useState<Prompt[]>([])
-  const [isLoading, setIsLoading] = useState(true)
   const [isSaving, setIsSaving] = useState(false)
+  const [errors, setErrors] = useState<string[]>([])
 
   /** Local State */
   const dateKey = date.format('YYYY-MM-DD')
+  const { body, setBody, prompts, isLoading } = useDailyPromptEditor(dateKey)
 
   /** Handlers */
   const handleSelectPrompt = (e: ChangeEvent<HTMLSelectElement>): void => {
-    const selected = prompts.find((p) => String(p.id) === e.target.value)
+    const selected = prompts.find(
+      (p: Prompt) => String(p.id) === e.target.value,
+    )
     if (selected) setBody(selected.body)
   }
 
@@ -40,27 +41,27 @@ const DatePanel = ({
     e,
   ): Promise<void> => {
     e.preventDefault()
-    setIsSaving(true)
     const trimmedBody = body.trim()
-    await upsertDailyPrompt(dateKey, trimmedBody)
-    setIsSaving(false)
-    handleSave(trimmedBody)
-  }
 
-  /** Effects */
-  useEffect(() => {
-    const load = async (): Promise<void> => {
-      setIsLoading(true)
-      const [dailyPrompt, availablePrompts] = await Promise.all([
-        fetchDailyPrompt(dateKey),
-        fetchPrompts(),
-      ])
-      setBody(dailyPrompt?.body ?? '')
-      setPrompts(availablePrompts)
-      setIsLoading(false)
+    if (trimmedBody === '') {
+      const confirmed = window.confirm(
+        'This will delete the prompt for this day. Continue?',
+      )
+      if (!confirmed) return
     }
-    void load()
-  }, [dateKey])
+
+    setIsSaving(true)
+    const result = await upsertDailyPrompt(dateKey, trimmedBody)
+    setIsSaving(false)
+
+    if (result.status === 'invalid') {
+      setErrors(result.errors ?? [])
+      return
+    }
+
+    setErrors([])
+    handleSave(result.dailyPrompt?.body ?? '')
+  }
 
   /** Render */
   return (
@@ -93,6 +94,13 @@ const DatePanel = ({
               rows={6}
               placeholder="Write a prompt for this day..."
             />
+            {errors.length > 0 ? (
+              <ul className="panel-body__errors">
+                {errors.map((error) => (
+                  <li key={error}>{error}</li>
+                ))}
+              </ul>
+            ) : null}
             <Button
               label={isSaving ? 'Saving...' : 'Save'}
               type="submit"

@@ -2,6 +2,12 @@ import { apiFetch } from '~/api/client'
 
 import type { IDailyPrompt } from '~/types/dailyPrompt'
 
+interface UpsertDailyPromptResult {
+  status: 'updated' | 'deleted' | 'invalid'
+  dailyPrompt?: IDailyPrompt
+  errors?: string[]
+}
+
 export const fetchDailyPrompts = async (): Promise<IDailyPrompt[]> => {
   const res = await apiFetch('/daily_prompts')
   return res.json()
@@ -18,7 +24,7 @@ export const fetchDailyPrompt = async (
 export const upsertDailyPrompt = async (
   date: string,
   body: string,
-): Promise<IDailyPrompt> => {
+): Promise<UpsertDailyPromptResult> => {
   const res = await apiFetch(`/daily_prompts/${date}`, {
     method: 'PATCH',
     body: JSON.stringify({ body }),

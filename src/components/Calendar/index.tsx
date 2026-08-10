@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import dayjs from 'dayjs'
 
-import { fetchDailyPrompts } from '~/api/dailyPrompts'
 import Button from '~/components/Button'
+import useDailyPrompts from '~/hooks/useDailyPrompts'
 import DatePanel from '~/pages/Dashboard/DatePanel'
 
 import CalendarCell from './CalendarCell'
@@ -16,9 +16,7 @@ const Calendar = (): ReactElement => {
   /** Hooks */
   const [selectedMonth, setSelectedMonth] = useState<Dayjs>(dayjs())
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
-  const [promptsByDate, setPromptsByDate] = useState<Map<string, string>>(
-    new Map(),
-  )
+  const { promptsByDate, setPromptsByDate } = useDailyPrompts()
 
   /** Local State */
   const startOfMonth = selectedMonth.startOf('month')
@@ -58,17 +56,6 @@ const Calendar = (): ReactElement => {
       return next
     })
   }
-
-  /** Effects */
-  useEffect(() => {
-    const load = async (): Promise<void> => {
-      const dailyPrompts = await fetchDailyPrompts()
-      setPromptsByDate(
-        new Map(dailyPrompts.map(({ date, body }) => [date, body])),
-      )
-    }
-    void load()
-  }, [])
 
   /** Render */
   return (

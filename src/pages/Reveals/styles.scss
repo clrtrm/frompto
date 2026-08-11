@@ -1,0 +1,13 @@
+.reveals-page {
+  .reveals-page-content {
+    display: flex;
+    flex-direction: column;
+    row-gap: $spacing-md;
+  }
+
+  .month {
+    &__label {
+      font-size: $font-size-lg;
+    }
+  }
+}

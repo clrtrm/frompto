@@ -1,5 +1,4 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import dayjs from 'dayjs'
 
 import Button from '~/components/Button'
 import useAuth from '~/context/auth/useAuth'
@@ -16,11 +15,9 @@ type TNavigationLocation = {
   scope?: TUserRole[]
 }
 
-const YESTERDAY = dayjs(new Date()).subtract(1, 'day').format('YYYY-MM-DD')
-
 const NAVIGATION_LOCATION: TNavigationLocation[] = [
   { label: 'Profile', path: '/profile' },
-  { label: 'Reveals', path: `/reveals/${YESTERDAY}` },
+  { label: 'Reveals', path: `/reveals` },
   { label: 'Dashboard', path: '/dashboard', scope: ['admin'] },
 ]
 

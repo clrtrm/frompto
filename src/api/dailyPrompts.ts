@@ -8,8 +8,25 @@ interface UpsertDailyPromptResult {
   errors?: string[]
 }
 
-export const fetchDailyPrompts = async (): Promise<IDailyPrompt[]> => {
-  const res = await apiFetch('/daily_prompts')
+export interface IFetchDailyPromptsParams {
+  startDate?: string
+  endDate?: string
+}
+
+export const fetchDailyPrompts = async ({
+  startDate,
+  endDate,
+}: IFetchDailyPromptsParams = {}): Promise<IDailyPrompt[]> => {
+  const searchParams = new URLSearchParams()
+
+  if (startDate) searchParams.set('start_date', startDate)
+  if (endDate) searchParams.set('end_date', endDate)
+
+  const queryString = searchParams.toString()
+  const res = await apiFetch(
+    `/daily_prompts${queryString ? `?${queryString}` : ''}`,
+  )
+
   return res.json()
 }
 

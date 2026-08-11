@@ -9,6 +9,7 @@ import LoginPage from '~/pages/Login'
 import NotFoundPage from '~/pages/NotFound'
 import ProfilePage from '~/pages/Profile'
 import RevealPage from '~/pages/Reveal'
+import RevealsPage from '~/pages/Reveals'
 import RootPage from '~/pages/RootPage'
 import SignUpPage from '~/pages/SignUp'
 
@@ -27,6 +28,7 @@ const App = (): ReactElement => {
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/reveals/:date" element={<RevealPage />} />
+          <Route path="/reveals" element={<RevealsPage />} />
           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
             <Route path="/dashboard" element={<DashboardPage />} />
           </Route>

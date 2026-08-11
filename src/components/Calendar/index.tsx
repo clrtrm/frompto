@@ -16,7 +16,7 @@ const Calendar = (): ReactElement => {
   /** Hooks */
   const [selectedMonth, setSelectedMonth] = useState<Dayjs>(dayjs())
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
-  const { promptsByDate, setPromptsByDate } = useDailyPrompts()
+  const { dailyPrompts, setDailyPrompts } = useDailyPrompts()
 
   /** Local State */
   const startOfMonth = selectedMonth.startOf('month')
@@ -49,10 +49,21 @@ const Calendar = (): ReactElement => {
 
   const handlePanelSave = (dateKey: string, newPromptBody: string): void => {
     handlePanelClose()
-    setPromptsByDate((prev) => {
-      const next = new Map(prev)
-      if (newPromptBody) next.set(dateKey, newPromptBody)
-      else next.delete(dateKey)
+    setDailyPrompts((prev) => {
+      const existingIndex = prev.findIndex(({ date }) => date === dateKey)
+
+      if (!newPromptBody) {
+        return existingIndex === -1
+          ? prev
+          : prev.filter(({ date }) => date !== dateKey)
+      }
+
+      if (existingIndex === -1) {
+        return [...prev, { id: 0, date: dateKey, body: newPromptBody }]
+      }
+
+      const next = [...prev]
+      next[existingIndex] = { ...next[existingIndex], body: newPromptBody }
       return next
     })
   }
@@ -78,7 +89,9 @@ const Calendar = (): ReactElement => {
         {days.map((day, index) => {
           const date = day ? selectedMonth.date(day) : null
           const dateKey = date?.format('YYYY-MM-DD')
-          const promptBody = dateKey ? promptsByDate.get(dateKey) : undefined
+          const promptBody = dateKey
+            ? dailyPrompts.find(({ date }) => date === dateKey)?.body
+            : undefined
 
           return (
             <CalendarCell

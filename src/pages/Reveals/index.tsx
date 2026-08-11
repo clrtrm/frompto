@@ -1,41 +1,41 @@
+import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 
 import PageTitle from '~/components/PageTitle'
 import useDailyPrompts from '~/hooks/useDailyPrompts'
 import useDocumentTitle from '~/hooks/useDocumentTitle'
 
+import type { TDailyPrompt } from '~/types/dailyPrompt'
 import type { ReactElement } from 'react'
 
 import './styles.scss'
 
 interface IMonthGroup {
   monthLabel: string
-  elements: [string, string][]
+  dailyPrompts: TDailyPrompt[]
 }
 
 const RevealPage = (): ReactElement => {
   /** Hooks */
   useDocumentTitle('Reveals')
 
-  const { promptsByDate } = useDailyPrompts()
+  const { dailyPrompts } = useDailyPrompts()
 
   /** Helpers */
   const groupPromptsByMonth = (): IMonthGroup[] => {
     const grouped: IMonthGroup[] = []
 
-    Array.from(promptsByDate)
-      .reverse()
-      .forEach(([date, question]) => {
-        const monthLabel = dayjs(date).format('MMMM YYYY')
+    dailyPrompts.reverse().forEach((el) => {
+      const monthLabel = dayjs(el.date).format('MMMM YYYY')
 
-        const existingGroup = grouped.find((el) => el.monthLabel === monthLabel)
+      const existingGroup = grouped.find((el) => el.monthLabel === monthLabel)
 
-        if (existingGroup) {
-          existingGroup.elements.push([date, question])
-        } else {
-          grouped.push({ monthLabel, elements: [[date, question]] })
-        }
-      })
+      if (existingGroup) {
+        existingGroup.dailyPrompts.push(el)
+      } else {
+        grouped.push({ monthLabel, dailyPrompts: [el] })
+      }
+    })
 
     return grouped
   }
@@ -49,13 +49,20 @@ const RevealPage = (): ReactElement => {
       <div className="reveals-page-content">
         {groupedPrompts.length > 0 ? (
           <>
-            {groupedPrompts.map(({ monthLabel, elements }) => (
+            {groupedPrompts.map(({ monthLabel, dailyPrompts }) => (
               <section key={monthLabel} className="month">
                 <h2 className="month__label">{monthLabel}</h2>
-                <ul>
-                  {elements.map(([date, question]) => (
-                    <li key={date}>
-                      {dayjs(date).format('DD')}: {question}
+                <ul className="month__list">
+                  {dailyPrompts.map(({ date, body, id }) => (
+                    <li>
+                      {dayjs(date).format('DD')}:{' '}
+                      <Link
+                        className="month__list__item"
+                        to={`${id}`}
+                        key={date}
+                      >
+                        {body}
+                      </Link>
                     </li>
                   ))}
                 </ul>

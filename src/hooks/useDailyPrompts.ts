@@ -3,33 +3,28 @@ import { useEffect, useState } from 'react'
 import { fetchDailyPrompts } from '~/api/dailyPrompts'
 
 import type { IFetchDailyPromptsParams } from '~/api/dailyPrompts'
+import type { TDailyPrompt } from '~/types/dailyPrompt'
 import type { Dispatch, SetStateAction } from 'react'
 
-interface UseDailyPromptsResult {
-  promptsByDate: Map<string, string>
-  setPromptsByDate: Dispatch<SetStateAction<Map<string, string>>>
+interface IResult {
+  dailyPrompts: TDailyPrompt[]
+  setDailyPrompts: Dispatch<SetStateAction<TDailyPrompt[]>>
 }
 
-const useDailyPrompts = (
-  options?: IFetchDailyPromptsParams,
-): UseDailyPromptsResult => {
+const useDailyPrompts = (options?: IFetchDailyPromptsParams): IResult => {
   /** Hooks */
-  const [promptsByDate, setPromptsByDate] = useState<Map<string, string>>(
-    new Map(),
-  )
+  const [dailyPrompts, setDailyPrompts] = useState<TDailyPrompt[]>([])
 
   /** Effects */
   useEffect(() => {
     const load = async (): Promise<void> => {
-      const dailyPrompts = await fetchDailyPrompts({ ...options })
-      setPromptsByDate(
-        new Map(dailyPrompts.map(({ date, body }) => [date, body])),
-      )
+      const response = await fetchDailyPrompts({ ...options })
+      setDailyPrompts(response)
     }
     void load()
   }, [options])
 
-  return { promptsByDate, setPromptsByDate }
+  return { dailyPrompts, setDailyPrompts }
 }
 
 export default useDailyPrompts

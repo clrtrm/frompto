@@ -5,4 +5,8 @@ export interface IDailyPrompt {
   date: string
   body: string
   replies: IReply[]
+  createdAt: string
+  updatedAt: string
 }
+
+export type TDailyPrompt = Pick<IDailyPrompt, 'id' | 'date' | 'body'>

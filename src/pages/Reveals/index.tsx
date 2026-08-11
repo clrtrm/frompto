@@ -53,12 +53,12 @@ const RevealPage = (): ReactElement => {
               <section key={monthLabel} className="month">
                 <h2 className="month__label">{monthLabel}</h2>
                 <ul className="month__list">
-                  {dailyPrompts.map(({ date, body, id }) => (
+                  {dailyPrompts.map(({ date, body }) => (
                     <li>
                       {dayjs(date).format('DD')}:{' '}
                       <Link
                         className="month__list__item"
-                        to={`${id}`}
+                        to={`${date}`}
                         key={date}
                       >
                         {body}

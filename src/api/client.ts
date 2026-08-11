@@ -12,8 +12,8 @@ export const getAuthToken = () => authToken
 
 export const apiFetch = async (path: string, options: RequestInit = {}) => {
   const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
     Accept: 'application/json',
+    ...(options.body ? { 'Content-Type': 'application/json' } : {}),
     ...(options.headers as Record<string, string>),
   }
 

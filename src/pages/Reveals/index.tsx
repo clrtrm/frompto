@@ -40,12 +40,22 @@ const RevealsPage = (): ReactElement => {
     return grouped
   }
 
+  const computeLockReason = (date: string) => {
+    const today = dayjs().format('YYYY-MM-DD')
+
+    return date === today ? 'Come back tomorrow!' : 'You have not answered.'
+  }
+
   /** Render */
   const groupedReveals = groupRevealsByMonth()
 
   return (
     <div className="reveals-page">
       <PageTitle textContent="Reveals" />
+      <p>
+        You have to answer to be able to read everyone's answers. Don't miss a
+        day! 😄
+      </p>
       <div className="reveals-page-content">
         {groupedReveals.length > 0 ? (
           <div className="reveals">
@@ -62,7 +72,10 @@ const RevealsPage = (): ReactElement => {
                       key={date}
                     >
                       {locked ? (
-                        <div className="reveal-item__classic-wrapper">
+                        <div
+                          className="reveal-item__classic-wrapper"
+                          title={computeLockReason(date)}
+                        >
                           <div className="reveal__day">
                             <span>{dayjs(date).format('D')}</span>
                           </div>

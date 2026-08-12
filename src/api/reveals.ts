@@ -1,6 +1,7 @@
 import { apiFetch } from './client'
 
 import type { IReveal } from '~/types/reveal'
+import type { IRevealSummary } from '~/types/reveal'
 
 interface IFetchRevealPayload {
   date: string
@@ -27,4 +28,9 @@ export const fetchReveal = async ({
 
   const data = (await res.json()) as IReveal
   return { status: 'ok', data }
+}
+
+export const fetchReveals = async (): Promise<IRevealSummary[]> => {
+  const res = await apiFetch('/reveals')
+  return res.json()
 }

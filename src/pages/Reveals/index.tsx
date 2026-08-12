@@ -1,41 +1,41 @@
+import { FaLock } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import clsx from 'clsx'
 import dayjs from 'dayjs'
 
 import PageTitle from '~/components/PageTitle'
-import useDailyPrompts from '~/hooks/useDailyPrompts'
 import useDocumentTitle from '~/hooks/useDocumentTitle'
+import useReveals from '~/hooks/useReveals'
 
-import type { TDailyPrompt } from '~/types/dailyPrompt'
+import type { IRevealSummary } from '~/types/reveal'
 import type { ReactElement } from 'react'
 
 import './styles.scss'
 
 interface IMonthGroup {
   monthLabel: string
-  dailyPrompts: TDailyPrompt[]
+  reveals: IRevealSummary[]
 }
 
 const RevealsPage = (): ReactElement => {
   /** Hooks */
   useDocumentTitle('Reveals')
 
-  const { dailyPrompts } = useDailyPrompts()
+  const { reveals } = useReveals()
 
   /** Helpers */
-  const groupPromptsByMonth = (): IMonthGroup[] => {
+  const groupRevealsByMonth = (): IMonthGroup[] => {
     const grouped: IMonthGroup[] = []
 
-    const reversedPrompts = [...dailyPrompts].reverse()
-
-    reversedPrompts.forEach((el) => {
+    reveals.forEach((el) => {
       const monthLabel = dayjs(el.date).format('MMMM YYYY')
 
       const existingGroup = grouped.find((el) => el.monthLabel === monthLabel)
 
       if (existingGroup) {
-        existingGroup.dailyPrompts.push(el)
+        existingGroup.reveals.push(el)
       } else {
-        grouped.push({ monthLabel, dailyPrompts: [el] })
+        grouped.push({ monthLabel, reveals: [el] })
       }
     })
 
@@ -43,30 +43,45 @@ const RevealsPage = (): ReactElement => {
   }
 
   /** Render */
-  const groupedPrompts = groupPromptsByMonth()
+  const groupedReveals = groupRevealsByMonth()
 
   return (
     <div className="reveals-page">
       <PageTitle textContent="Reveals" />
       <div className="reveals-page-content">
-        {groupedPrompts.length > 0 ? (
-          <div className="prompts">
-            {groupedPrompts.map(({ monthLabel, dailyPrompts }) => (
+        {groupedReveals.length > 0 ? (
+          <div className="reveals">
+            {groupedReveals.map(({ monthLabel, reveals }) => (
               <section key={monthLabel} className="month-section">
                 <h2 className="month-section__title">{monthLabel}</h2>
                 <ul className="month-section__items">
-                  {dailyPrompts.map(({ date, body }) => (
-                    <li className="daily-prompt">
-                      <Link
-                        className="daily-prompt__link"
-                        to={`${date}`}
-                        key={date}
-                      >
-                        <div className="daily-prompt__link__day">
-                          <span>{dayjs(date).format('D')}</span>
+                  {reveals.map(({ date, body, locked }) => (
+                    <li
+                      className={clsx('reveal-item', {
+                        'reveal-item--locked': locked,
+                        'reveal-item--unlocked': !locked,
+                      })}
+                      key={date}
+                    >
+                      {locked ? (
+                        <div className="reveal-item__classic-wrapper">
+                          <div className="reveal__day">
+                            <span>{dayjs(date).format('D')}</span>
+                          </div>
+                          <p className="reveal__body">{body}</p>
+                          <FaLock />
                         </div>
-                        <p className="daily-prompt__link__body">{body}</p>
-                      </Link>
+                      ) : (
+                        <Link
+                          className="reveal-item__link-wrapper"
+                          to={`${date}`}
+                        >
+                          <div className="reveal__day">
+                            <span>{dayjs(date).format('D')}</span>
+                          </div>
+                          <p className="reveal__body">{body}</p>
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>

@@ -6,3 +6,9 @@ export interface IReveal {
   body: string
   replies: IReply[]
 }
+
+export interface IRevealSummary {
+  date: string
+  body: string
+  locked: boolean
+}

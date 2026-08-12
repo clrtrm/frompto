@@ -25,7 +25,9 @@ const RevealPage = (): ReactElement => {
   const groupPromptsByMonth = (): IMonthGroup[] => {
     const grouped: IMonthGroup[] = []
 
-    dailyPrompts.reverse().forEach((el) => {
+    const reversedPrompts = [...dailyPrompts].reverse()
+
+    reversedPrompts.forEach((el) => {
       const monthLabel = dayjs(el.date).format('MMMM YYYY')
 
       const existingGroup = grouped.find((el) => el.monthLabel === monthLabel)

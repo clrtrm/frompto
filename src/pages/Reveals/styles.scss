@@ -1,18 +1,74 @@
 .reveals-page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+
   .reveals-page-content {
     display: flex;
     flex-direction: column;
+    margin-top: $spacing-lg;
     row-gap: $spacing-md;
   }
 
-  .month {
-    &__label {
-      font-size: $font-size-lg;
-    }
+  .prompts {
+    background-color: $color-primary-10;
+    border-radius: $radius-lg;
+    display: flex;
+    flex-direction: column;
+    padding: $spacing-md $spacing-lg;
+    row-gap: $spacing-xl;
 
-    &__list {
-      display: flex;
-      flex-direction: column;
+    .month-section {
+      &__title {
+        font-size: $font-size-lg;
+        margin-bottom: $spacing-sm;
+      }
+
+      &__items {
+        display: flex;
+        flex-direction: column;
+        row-gap: $spacing-sm;
+
+        .daily-prompt {
+          background-color: $color-primary-30;
+          border-radius: $radius-lg;
+          max-width: 60rem;
+          padding: $spacing-xs;
+
+          &:hover {
+            filter: brightness(1.1);
+          }
+
+          &__link {
+            align-items: center;
+            border-radius: inherit;
+            column-gap: $spacing-sm;
+            display: flex;
+
+            &__day {
+              align-items: center;
+              aspect-ratio: 1/1;
+              background-color: $color-primary-40;
+              border-radius: 100%;
+              display: flex;
+              height: 2.5rem;
+              justify-content: center;
+
+              span {
+                color: $color-neutral-5;
+                font-size: $font-size-sm;
+                font-weight: 500;
+              }
+            }
+
+            &__body {
+              @include ellipsed;
+            }
+          }
+        }
+      }
     }
   }
 }

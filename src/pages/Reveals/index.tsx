@@ -50,27 +50,29 @@ const RevealPage = (): ReactElement => {
       <PageTitle textContent="Reveals" />
       <div className="reveals-page-content">
         {groupedPrompts.length > 0 ? (
-          <>
+          <div className="prompts">
             {groupedPrompts.map(({ monthLabel, dailyPrompts }) => (
-              <section key={monthLabel} className="month">
-                <h2 className="month__label">{monthLabel}</h2>
-                <ul className="month__list">
+              <section key={monthLabel} className="month-section">
+                <h2 className="month-section__title">{monthLabel}</h2>
+                <ul className="month-section__items">
                   {dailyPrompts.map(({ date, body }) => (
-                    <li>
-                      {dayjs(date).format('DD')}:{' '}
+                    <li className="daily-prompt">
                       <Link
-                        className="month__list__item"
+                        className="daily-prompt__link"
                         to={`${date}`}
                         key={date}
                       >
-                        {body}
+                        <div className="daily-prompt__link__day">
+                          <span>{dayjs(date).format('D')}</span>
+                        </div>
+                        <p className="daily-prompt__link__body">{body}</p>
                       </Link>
                     </li>
                   ))}
                 </ul>
               </section>
             ))}
-          </>
+          </div>
         ) : null}
       </div>
     </div>

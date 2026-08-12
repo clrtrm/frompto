@@ -10,8 +10,9 @@ export default defineConfig({
       scss: {
         additionalData: `
           @use "~/styles/colors.scss" as *;
-          @use "~/styles/sizes.scss" as *;
           @use "~/styles/fonts.scss" as *;
+          @use "~/styles/mixins.scss" as *;
+          @use "~/styles/sizes.scss" as *;
         `,
       },
     },

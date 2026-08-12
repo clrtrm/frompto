@@ -58,14 +58,14 @@ const RevealPage = (): ReactElement => {
   }
 
   return (
-    <div className="page reveal-page">
-      <span className="prompt-body">{result.data.body}</span>
+    <div className="reveal-page">
+      <PageTitle textContent={result.data.body} />
       <div className="replies-list">
         {result.data.replies.map(({ id, author, body }) => (
           <div key={id} className="reply">
             <span className="author-names">
               <span className="author-names__display-name">
-                {author.displayName}
+                {author.displayNameOrUsername}
               </span>
               <span className="author-names__username">
                 {` @${author.username}`}

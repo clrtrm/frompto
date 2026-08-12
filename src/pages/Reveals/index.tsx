@@ -15,7 +15,7 @@ interface IMonthGroup {
   dailyPrompts: TDailyPrompt[]
 }
 
-const RevealPage = (): ReactElement => {
+const RevealsPage = (): ReactElement => {
   /** Hooks */
   useDocumentTitle('Reveals')
 
@@ -79,4 +79,4 @@ const RevealPage = (): ReactElement => {
   )
 }
 
-export default RevealPage
+export default RevealsPage

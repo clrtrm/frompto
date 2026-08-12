@@ -1,16 +1,11 @@
 .reveal-page {
   height: 100%;
 
-  .prompt-body {
-    font-size: $font-size-xxl;
-    font-weight: 600;
-  }
-
   .replies-list {
     display: flex;
     flex-direction: column;
     margin-top: $spacing-lg;
-    max-width: 90rem;
+    max-width: 60rem;
     row-gap: $spacing-md;
 
     .reply {

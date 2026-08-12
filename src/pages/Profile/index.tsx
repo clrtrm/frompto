@@ -1,14 +1,11 @@
 import PageTitle from '~/components/PageTitle'
 import useAuth from '~/context/auth/useAuth'
-import useDocumentTitle from '~/hooks/useDocumentTitle'
 
 import type { ReactElement } from 'react'
 
 import './styles.scss'
 
 const ProfilePage = (): ReactElement => {
-  useDocumentTitle('Profile')
-
   const { user } = useAuth()
 
   /** Render */

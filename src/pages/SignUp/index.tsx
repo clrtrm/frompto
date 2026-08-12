@@ -4,7 +4,6 @@ import FormField from '~/components/auth/FormField'
 import Button from '~/components/Button'
 import PageTitle from '~/components/PageTitle'
 import useAuth from '~/context/auth/useAuth'
-import useDocumentTitle from '~/hooks/useDocumentTitle'
 
 import type { SubmitEventHandler } from 'react'
 
@@ -12,7 +11,6 @@ import './styles.scss'
 
 const SignUp = () => {
   /** Hooks */
-  useDocumentTitle('Sign up')
   const { signUp } = useAuth()
 
   /** Local State */
@@ -54,7 +52,10 @@ const SignUp = () => {
         </>
       ) : (
         <>
-          <PageTitle textContent="Create a new account" />
+          <PageTitle
+            textContent="Create a new account"
+            documentTitle="Sign up"
+          />
           <div className="sign-up-page-main-content">
             <form className="sign-up-form" onSubmit={handleSubmit}>
               {formError ? (

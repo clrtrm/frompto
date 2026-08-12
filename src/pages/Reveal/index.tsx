@@ -2,7 +2,6 @@ import { Link, useParams } from 'react-router-dom'
 
 import PageTitle from '~/components/PageTitle'
 import { ISO_DATE_REGEX } from '~/const'
-import useDocumentTitle from '~/hooks/useDocumentTitle'
 import useReveal from '~/hooks/useReveal'
 import NotFoundPage from '~/pages/NotFound'
 
@@ -12,7 +11,6 @@ import './styles.scss'
 
 const RevealPage = (): ReactElement => {
   /** Hooks */
-  useDocumentTitle('La Place du Village')
 
   const { date } = useParams<{ date: string }>()
   const isValidDate = ISO_DATE_REGEX.test(date ?? '')

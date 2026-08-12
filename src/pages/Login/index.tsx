@@ -5,7 +5,6 @@ import FormField from '~/components/auth/FormField'
 import Button from '~/components/Button'
 import PageTitle from '~/components/PageTitle'
 import useAuth from '~/context/auth/useAuth'
-import useDocumentTitle from '~/hooks/useDocumentTitle'
 
 import type { SubmitEventHandler } from 'react'
 
@@ -15,8 +14,6 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [formError, setFormError] = useState('')
-
-  useDocumentTitle('Sign in')
 
   const { login } = useAuth()
 
@@ -39,7 +36,7 @@ const Login = () => {
 
   return (
     <div className="login-page">
-      <PageTitle textContent="Log in" />
+      <PageTitle textContent="Sign in" />
       <div className="login-page-main-content">
         <form onSubmit={handleSubmit} className="login-form">
           {formError ? <div className="form-errors">{formError}</div> : null}

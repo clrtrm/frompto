@@ -4,7 +4,6 @@ import clsx from 'clsx'
 import dayjs from 'dayjs'
 
 import PageTitle from '~/components/PageTitle'
-import useDocumentTitle from '~/hooks/useDocumentTitle'
 import useReveals from '~/hooks/useReveals'
 
 import type { IRevealSummary } from '~/types/reveal'
@@ -19,7 +18,6 @@ interface IMonthGroup {
 
 const RevealsPage = (): ReactElement => {
   /** Hooks */
-  useDocumentTitle('Reveals')
 
   const { reveals } = useReveals()
 

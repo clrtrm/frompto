@@ -1,20 +1,17 @@
 import { Link } from 'react-router-dom'
 
 import PageTitle from '~/components/PageTitle'
-import useDocumentTitle from '~/hooks/useDocumentTitle'
 
 import type { ReactElement } from 'react'
 
 import './styles.scss'
 
 const NotFoundPage = (): ReactElement => {
-  useDocumentTitle('Oh no >:{')
-
   const gitHubURL = import.meta.env.VITE_GITHUB_URL
 
   return (
     <div className="not-found-page">
-      <PageTitle textContent="Not found" />
+      <PageTitle textContent="Not found" documentTitle="Oh no >:{" />
       <p>
         The requested resource could not be found. <br />
         Please check your spelling in the URL or

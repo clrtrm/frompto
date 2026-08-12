@@ -1,4 +1,5 @@
 import Calendar from '~/components/Calendar'
+import PageTitle from '~/components/PageTitle'
 import useDocumentTitle from '~/hooks/useDocumentTitle'
 
 import type { ReactElement } from 'react'
@@ -10,7 +11,7 @@ const DashboardPage = (): ReactElement => {
 
   return (
     <div className="dashboard-page">
-      <h1 className="page-title">Admin dashboard</h1>
+      <PageTitle textContent="Admin dashboard" />
       <div className="dashboard-page-content">
         <span>
           New day, new prompt! Make sure each day has a prompt assigned.

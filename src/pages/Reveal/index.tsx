@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
+import dayjs from 'dayjs'
 
 import PageTitle from '~/components/PageTitle'
 import { ISO_DATE_REGEX } from '~/const'
@@ -57,21 +58,23 @@ const RevealPage = (): ReactElement => {
 
   return (
     <div className="reveal-page">
-      <PageTitle textContent={result.data.body} />
-      <div className="replies-list">
-        {result.data.replies.map(({ id, author, body }) => (
-          <div key={id} className="reply">
-            <span className="author-names">
-              <span className="author-names__display-name">
-                {author.displayNameOrUsername}
+      <div className="reveal-page__header">
+        <span className="prompt-date">
+          Question for {dayjs(result.data.date).format('MMMM D, YYYY')}
+        </span>
+        <PageTitle className="prompt-body" textContent={result.data.body} />
+      </div>
+      <div className="reveal-page__body">
+        <div className="reveal-page__body__replies">
+          {result.data.replies.map(({ id, author, body }) => (
+            <div key={id} className="reply">
+              <span className="reply__author-name">
+                {author.displayNameOrUsername}:
               </span>
-              <span className="author-names__username">
-                {` @${author.username}`}
-              </span>
-            </span>
-            <span className="reply__right__reply-body">{body}</span>
-          </div>
-        ))}
+              <span className="reply__body">{body}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )

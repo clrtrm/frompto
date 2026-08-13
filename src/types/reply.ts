@@ -1,7 +1,7 @@
-import type { IUser } from '~/types/auth'
+import type { IReplyUser } from '~/types/auth'
 
 export interface IReply {
   id: number
   body: string
-  author: IUser
+  author: IReplyUser
 }

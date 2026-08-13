@@ -1,7 +1,7 @@
 export type TUserRole = 'admin' | 'member'
 
 export interface IUser {
-  id: string
+  id: number
   createdAt: string
   displayName: string | null
   displayNameOrUsername: string
@@ -10,3 +10,5 @@ export interface IUser {
   updatedAt: string
   username: string
 }
+
+export type IReplyUser = Pick<IUser, 'id' | 'displayNameOrUsername'>

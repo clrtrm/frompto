@@ -1,32 +1,47 @@
 .reveal-page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  margin-top: $spacing-xl;
 
-  .replies-list {
-    display: flex;
-    flex-direction: column;
-    margin-top: $spacing-lg;
-    max-width: 60rem;
-    row-gap: $spacing-md;
+  &__header {
+    border-bottom: 0.1rem solid $color-primary-90;
+    padding-bottom: $spacing-sm;
+    width: 80rem;
 
-    .reply {
-      background-color: $color-primary-10;
-      border-radius: $radius-lg;
+    .prompt-date {
+      color: $color-primary-90;
+      font-size: $font-size-sm;
+      font-weight: 500;
+    }
+
+    .prompt-body {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__body {
+    width: 80rem;
+
+    &__replies {
       display: flex;
       flex-direction: column;
-      padding: $spacing-sm;
+      margin-top: $spacing-lg;
+      row-gap: $spacing-md;
 
-      .author-names {
-        align-items: center;
-        column-gap: $spacing-xs;
+      .reply {
+        background-color: $color-primary-10;
+        border-radius: $radius-lg;
         display: flex;
+        flex-direction: column;
+        padding: $spacing-sm;
+        width: 40rem;
 
-        &__display-name {
-          font-weight: 600;
-        }
-
-        &__username {
-          color: $color-neutral-5;
+        &__author-name {
           font-size: $font-size-sm;
+          font-weight: 600;
+          text-transform: uppercase;
         }
       }
     }

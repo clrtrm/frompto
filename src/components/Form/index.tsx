@@ -23,8 +23,8 @@ const Form = ({
           <p className="form-component__errors__title">
             Uh-oh! Some errors arose:
           </p>
-          {errors.map((el) => (
-            <li>{el}</li>
+          {errors.map((el, idx) => (
+            <li key={idx}>{el}</li>
           ))}
         </ul>
       ) : null}

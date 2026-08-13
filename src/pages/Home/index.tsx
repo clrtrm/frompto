@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import clsx from 'clsx'
 
 import { apiFetch } from '~/api/client'
 import {
@@ -16,6 +17,9 @@ import type { IReply } from '~/types/reply'
 import type { ReactElement, SubmitEventHandler } from 'react'
 
 import './styles.scss'
+
+const REPLY_MIN_LENGTH = 3
+const REPLY_MAX_LENGTH = 500
 
 const HomePage = (): ReactElement => {
   /** Local state */
@@ -84,7 +88,7 @@ const HomePage = (): ReactElement => {
                   You answered! Come back at 10am tomorrow to see what everyone
                   said.
                 </p>
-                <span className="reply__body">{reply.body}</span>
+                <div className="reply__body">{reply.body}</div>
               </div>
             ) : (
               <Form
@@ -98,9 +102,26 @@ const HomePage = (): ReactElement => {
                   onChange={(e) => setReplyBody(e.target.value)}
                   name="replyBody"
                   rows={6}
+                  maxLength={500}
                   id=""
                   value={replyBody}
                 />
+                <span className="characters-indicator">
+                  <span
+                    className={clsx('characters-count', {
+                      'characters-count--valid':
+                        replyBody.length >= REPLY_MIN_LENGTH &&
+                        replyBody.length < REPLY_MAX_LENGTH * 0.9,
+                      'characters-count--warning':
+                        replyBody.length > REPLY_MAX_LENGTH * 0.9 &&
+                        replyBody.length < REPLY_MAX_LENGTH,
+                    })}
+                  >
+                    {replyBody.length}
+                    {replyBody.length === REPLY_MAX_LENGTH ? '🫪' : null}
+                  </span>
+                  / 500
+                </span>
                 <Button
                   label="Answer now"
                   disabled={replyBody.trim().length < 3}

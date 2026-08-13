@@ -40,6 +40,7 @@
       &__body {
         background-color: papayawhip;
         border-radius: $radius-sm;
+        overflow-wrap: break-word;
         padding: $spacing-md $spacing-lg;
       }
     }
@@ -51,6 +52,24 @@
         border: 0.1rem solid $color-primary-90;
         border-radius: $radius-sm;
         padding: $spacing-md $spacing-lg;
+      }
+
+      .characters-indicator {
+        display: flex;
+        font-size: $font-size-sm;
+        justify-content: flex-end;
+
+        .characters-count {
+          margin-right: 0.2rem;
+
+          &--valid {
+            color: $color-success-100;
+          }
+
+          &--warning {
+            color: $color-warning-100;
+          }
+        }
       }
     }
   }

@@ -2,15 +2,11 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: calc(100dvh - $navbar-height - 8rem);
   justify-content: center;
 
-  .page-main-container {
-    margin-top: $spacing-md;
-    max-width: 60rem;
-    width: 100%;
-
-    &__app-pitch {
+  &__body {
+    .pitch {
       font-size: $font-size-lg;
       line-height: 200%;
       text-align: center;

@@ -1,4 +1,7 @@
 .dashboard-page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   height: 100%;
 
   .dashboard-page-content {

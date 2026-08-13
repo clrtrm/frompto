@@ -3,36 +3,54 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  justify-content: center;
+  margin-top: $spacing-xl;
 
   .greeting {
     color: $color-primary-40;
     font-size: $font-size-lg;
   }
 
-  .prompt-container {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    margin-top: $spacing-lg;
-    row-gap: $spacing-lg;
+  &__header {
+    border-bottom: 0.1rem solid $color-primary-90;
+    padding-bottom: $spacing-sm;
+    width: 80rem;
 
-    .prompt-body {
-      font-size: $font-size-xl;
-      font-weight: 600;
+    .prompt-date {
+      color: $color-primary-90;
+      font-size: $font-size-md;
+      font-weight: 500;
     }
+  }
 
-    .reply-container {
+  &__body {
+    display: flex;
+    justify-content: center;
+    margin-top: $spacing-lg;
+    width: 80rem;
+
+    .reply {
       display: flex;
       flex-direction: column;
+      width: 100%;
 
-      .reply-body {
-        background-color: papayawhip;
-        padding: $spacing-md;
+      &__status {
+        font-size: $font-size-sm;
       }
 
-      .come-back {
-        font-size: $font-size-sm;
+      &__body {
+        background-color: papayawhip;
+        border-radius: $radius-sm;
+        padding: $spacing-md $spacing-lg;
+      }
+    }
+
+    .reply-form {
+      width: 100%;
+
+      textarea {
+        border: 0.1rem solid $color-primary-90;
+        border-radius: $radius-sm;
+        padding: $spacing-md $spacing-lg;
       }
     }
   }

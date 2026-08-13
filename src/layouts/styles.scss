@@ -2,7 +2,8 @@
   height: 100%;
 
   &__page-container {
-    height: calc(100% - $navbar-height);
-    padding: $spacing-lg $spacing-md;
+    height: fit-content;
+    min-height: calc(100% - $navbar-height);
+    padding: $spacing-xl $spacing-lg;
   }
 }

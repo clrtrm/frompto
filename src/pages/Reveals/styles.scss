@@ -19,6 +19,7 @@
     flex-direction: column;
     padding: $spacing-md $spacing-lg;
     row-gap: $spacing-xl;
+    width: 80rem;
 
     .month-section {
       &__title {
@@ -34,7 +35,6 @@
         .reveal-item {
           background-color: $color-primary-30;
           border-radius: $radius-lg;
-          max-width: 60rem;
 
           &--unlocked {
             &:hover {

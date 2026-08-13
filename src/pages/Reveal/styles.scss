@@ -12,22 +12,18 @@
 
     .prompt-date {
       color: $color-primary-90;
-      font-size: $font-size-sm;
+      font-size: $font-size-md;
       font-weight: 500;
-    }
-
-    .prompt-body {
-      font-size: $font-size-lg;
     }
   }
 
   &__body {
+    margin-top: $spacing-lg;
     width: 80rem;
 
     &__replies {
       display: flex;
       flex-direction: column;
-      margin-top: $spacing-lg;
       row-gap: $spacing-md;
 
       .reply {

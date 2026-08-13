@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import dayjs from 'dayjs'
 
 import { apiFetch } from '~/api/client'
 import {
@@ -9,7 +8,7 @@ import {
 } from '~/api/replies'
 import Button from '~/components/Button'
 import Form from '~/components/Form'
-import useAuth from '~/context/auth/useAuth'
+import PageTitle from '~/components/PageTitle'
 
 import type { IApiErrors } from '~/api/replies'
 import type { IDailyPrompt } from '~/types/dailyPrompt'
@@ -20,7 +19,6 @@ import './styles.scss'
 
 const HomePage = (): ReactElement => {
   /** Local state */
-  const { user } = useAuth()
   const [dailyPrompt, setDailyPrompt] = useState<IDailyPrompt | null>(null)
   const [reply, setReply] = useState<IReply | null>(null)
   const [loading, setLoading] = useState(true)
@@ -70,44 +68,47 @@ const HomePage = (): ReactElement => {
 
   /** Render */
   return (
-    <div className="page home-page">
-      <span className="greeting">
-        Welcome back, {user?.displayNameOrUsername}
-      </span>
-      <span className="today-date">
-        {dayjs().format('dddd MMMM DD, YYYY')}:
-      </span>
+    <div className="home-page">
       {loading ? (
         <p className="loader">Loading...</p>
       ) : dailyPrompt ? (
-        <div className="prompt-container">
-          <span className="prompt-body">{dailyPrompt.body}</span>
-          {reply ? (
-            <div className="reply-container">
-              <p className="come-back">
-                You answered! Come back at 10am tomorrow to see what everyone
-                said.
-              </p>
-              <span className="reply-body">{reply.body}</span>
-            </div>
-          ) : (
-            <Form errors={formErrors} onSubmit={handleSubmit}>
-              <textarea
-                minLength={3}
-                placeholder="Be loud and proud..."
-                onChange={(e) => setReplyBody(e.target.value)}
-                name="replyBody"
-                rows={6}
-                id=""
-                value={replyBody}
-              />
-              <Button
-                label="Answer now"
-                disabled={replyBody.trim().length < 3}
-              />
-            </Form>
-          )}
-        </div>
+        <>
+          <div className="home-page__header">
+            <span className="prompt-date">Today's question:</span>
+            <PageTitle className="prompt-body" textContent={dailyPrompt.body} />
+          </div>
+          <div className="home-page__body">
+            {reply ? (
+              <div className="reply">
+                <p className="reply__status">
+                  You answered! Come back at 10am tomorrow to see what everyone
+                  said.
+                </p>
+                <span className="reply__body">{reply.body}</span>
+              </div>
+            ) : (
+              <Form
+                className="reply-form"
+                errors={formErrors}
+                onSubmit={handleSubmit}
+              >
+                <textarea
+                  minLength={3}
+                  placeholder="Be loud and proud..."
+                  onChange={(e) => setReplyBody(e.target.value)}
+                  name="replyBody"
+                  rows={6}
+                  id=""
+                  value={replyBody}
+                />
+                <Button
+                  label="Answer now"
+                  disabled={replyBody.trim().length < 3}
+                />
+              </Form>
+            )}
+          </div>
+        </>
       ) : (
         <p>No prompt for today yet.</p>
       )}

@@ -11,8 +11,8 @@ const LandingPage = (): ReactElement => {
         textContent="Prompto"
         documentTitle="Cozy Check-ins with Strangers"
       />
-      <div className="page-main-container">
-        <p className="page-main-container__app-pitch">
+      <div className="landing-page__body">
+        <p className="pitch">
           New question, every morning, 10am sharp.
           <br />
           You've got 24 hours to answer before the big reveal.

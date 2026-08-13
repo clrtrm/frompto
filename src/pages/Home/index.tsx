@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import clsx from 'clsx'
 
 import { apiFetch } from '~/api/client'
 import {
@@ -8,6 +7,7 @@ import {
   flattenCreateReplyErrors,
 } from '~/api/replies'
 import Button from '~/components/Button'
+import CharactersCount from '~/components/CharactersCount'
 import Form from '~/components/Form'
 import PageTitle from '~/components/PageTitle'
 
@@ -17,9 +17,6 @@ import type { IReply } from '~/types/reply'
 import type { ReactElement, SubmitEventHandler } from 'react'
 
 import './styles.scss'
-
-const REPLY_MIN_LENGTH = 3
-const REPLY_MAX_LENGTH = 500
 
 const HomePage = (): ReactElement => {
   /** Local state */
@@ -106,22 +103,11 @@ const HomePage = (): ReactElement => {
                   id=""
                   value={replyBody}
                 />
-                <span className="characters-indicator">
-                  <span
-                    className={clsx('characters-count', {
-                      'characters-count--valid':
-                        replyBody.length >= REPLY_MIN_LENGTH &&
-                        replyBody.length < REPLY_MAX_LENGTH * 0.9,
-                      'characters-count--warning':
-                        replyBody.length > REPLY_MAX_LENGTH * 0.9 &&
-                        replyBody.length < REPLY_MAX_LENGTH,
-                    })}
-                  >
-                    {replyBody.length}
-                    {replyBody.length === REPLY_MAX_LENGTH ? '🫪' : null}
-                  </span>
-                  / 500
-                </span>
+                <CharactersCount
+                  currentLength={replyBody.length}
+                  maxLength={500}
+                  minLength={3}
+                />
                 <Button
                   label="Answer now"
                   disabled={replyBody.trim().length < 3}

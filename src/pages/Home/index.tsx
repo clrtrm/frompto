@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react'
 
 import { apiFetch } from '~/api/client'
-import {
-  createReply,
-  fetchReply,
-  flattenCreateReplyErrors,
-} from '~/api/replies'
+import { createReply, fetchReply } from '~/api/replies'
 import Button from '~/components/Button'
 import CharactersCount from '~/components/CharactersCount'
 import Form from '~/components/Form'
 import PageTitle from '~/components/PageTitle'
 
-import type { IApiErrors } from '~/api/replies'
+import type { IApiErrors } from '~/api/errors'
 import type { IDailyPrompt } from '~/types/dailyPrompt'
 import type { IReply } from '~/types/reply'
 import type { ReactElement, SubmitEventHandler } from 'react'
@@ -40,9 +36,7 @@ const HomePage = (): ReactElement => {
     } catch (err) {
       const apiErrors = err as IApiErrors
       setFormErrors(
-        apiErrors?.errors
-          ? flattenCreateReplyErrors(apiErrors.errors)
-          : ['Something went wrong'],
+        apiErrors?.errors ? apiErrors.errors : ['Something went wrong'],
       )
     }
   }

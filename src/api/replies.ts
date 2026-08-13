@@ -1,18 +1,7 @@
 import { apiFetch } from '~/api/client'
-import { capitalize } from '~/utils/string'
 
+import type { IApiErrors } from './errors'
 import type { IReply } from '~/types/reply'
-
-export interface IApiErrors {
-  errors: Record<string, string[]>
-}
-
-export const flattenCreateReplyErrors = (
-  errors: Record<string, string[]>,
-): string[] =>
-  Object.entries(errors).flatMap(([field, messages]) =>
-    messages.map((message) => `${capitalize(field)} ${message}`),
-  )
 
 export const createReply = async (
   date: string,

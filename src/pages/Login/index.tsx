@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import FormField from '~/components/auth/FormField'
 import Button from '~/components/Button'
@@ -37,7 +37,7 @@ const Login = () => {
   return (
     <div className="login-page">
       <PageTitle textContent="Sign in" />
-      <div className="login-page-main-content">
+      <div className="login-page__body">
         <form onSubmit={handleSubmit} className="login-form">
           {formError ? <div className="form-errors">{formError}</div> : null}
           <FormField
@@ -60,6 +60,9 @@ const Login = () => {
           />
           <Button label="Log in" type="submit" />
         </form>
+        <Link className="forgot-password-link" to="/forgot-password">
+          Forgot password?
+        </Link>
       </div>
     </div>
   )

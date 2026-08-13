@@ -5,9 +5,11 @@ import ProtectedRoute from '~/components/ProtectedRoute'
 import Layout from '~/layouts'
 import ConfirmEmailPage from '~/pages/ConfirmEmail'
 import DashboardPage from '~/pages/Dashboard'
+import ForgotPasswordPage from '~/pages/ForgotPassword'
 import LoginPage from '~/pages/Login'
 import NotFoundPage from '~/pages/NotFound'
 import ProfilePage from '~/pages/Profile'
+import ResetPasswordPage from '~/pages/ResetPassword'
 import RevealPage from '~/pages/Reveal'
 import RevealsPage from '~/pages/Reveals'
 import RootPage from '~/pages/RootPage'
@@ -22,6 +24,8 @@ const App = (): ReactElement => {
         <Route index element={<RootPage />} />
         <Route element={<GuestRoute />}>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/password/edit" element={<ResetPasswordPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/confirm-email" element={<ConfirmEmailPage />} />
         </Route>

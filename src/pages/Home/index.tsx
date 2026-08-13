@@ -34,7 +34,7 @@ const HomePage = (): ReactElement => {
     if (!dailyPrompt) return
 
     try {
-      const newReply = await createReply(dailyPrompt.date, replyBody)
+      const newReply = await createReply(dailyPrompt.date, replyBody.trim())
       setReply(newReply)
       setFormErrors([])
     } catch (err) {

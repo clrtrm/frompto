@@ -20,9 +20,7 @@ const Form = ({
     <form className={classes} {...rest}>
       {errors.length > 0 ? (
         <ul className="form-component__errors">
-          <p className="form-component__errors__title">
-            Uh-oh! Some errors arose:
-          </p>
+          <p className="form-component__errors__title">Uh-oh!</p>
           {errors.map((el, idx) => (
             <li key={idx}>{el}</li>
           ))}

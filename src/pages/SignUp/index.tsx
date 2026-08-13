@@ -2,14 +2,16 @@ import { useState } from 'react'
 
 import FormField from '~/components/auth/FormField'
 import Button from '~/components/Button'
+import Form from '~/components/Form'
 import PageTitle from '~/components/PageTitle'
 import useAuth from '~/context/auth/useAuth'
 
-import type { SubmitEventHandler } from 'react'
+import type { IApiErrors } from '~/api/errors'
+import type { ReactElement, SubmitEventHandler } from 'react'
 
 import './styles.scss'
 
-const SignUp = () => {
+const SignUp = (): ReactElement => {
   /** Hooks */
   const { signUp } = useAuth()
 
@@ -17,22 +19,23 @@ const SignUp = () => {
   const [email, setEmail] = useState('')
   const [displayName, setDisplayName] = useState('')
   const [password, setPassword] = useState('')
-  const [formError, setFormError] = useState('')
+  const [formErrors, setFormErrors] = useState<string[]>([])
   const [successMessage, setSuccessMessage] = useState('')
 
   /** Handlers */
-  const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
-    e.preventDefault()
+  const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault()
 
     try {
       const message = await signUp({ email, password, displayName })
-      setFormError('')
+      setFormErrors([])
       setSuccessMessage(message)
-    } catch (e: unknown) {
-      setFormError(
-        e instanceof Error
-          ? e.message
-          : 'Something went wrong. 😖 Please check your information and try again.',
+    } catch (err) {
+      const apiErrors = err as IApiErrors
+      setFormErrors(
+        apiErrors?.errors ?? [
+          'Something went wrong. 😖 Please check your information and try again.',
+        ],
       )
     }
   }
@@ -57,10 +60,11 @@ const SignUp = () => {
             documentTitle="Sign up"
           />
           <div className="sign-up-page-main-content">
-            <form className="sign-up-form" onSubmit={handleSubmit}>
-              {formError ? (
-                <div className="form-errors">{formError}</div>
-              ) : null}
+            <Form
+              className="sign-up-form"
+              errors={formErrors}
+              onSubmit={handleSubmit}
+            >
               <FormField
                 autoComplete="username"
                 id="email"
@@ -73,9 +77,11 @@ const SignUp = () => {
               />
               <FormField
                 autoComplete="off"
+                helper="Optional. You can change it later."
                 id="displayName"
                 label="Display name"
                 value={displayName}
+                maxLength={50}
                 onChange={setDisplayName}
                 placeholder="Display name"
               />
@@ -86,13 +92,14 @@ const SignUp = () => {
                 maxLength={128}
                 minLength={6}
                 onChange={setPassword}
+                helper="At least 6 characters. Do your best to make it secure. 🥷"
                 placeholder="Your password"
                 required
                 type="password"
                 value={password}
               />
               <Button label="Sign up" type="submit" />
-            </form>
+            </Form>
           </div>
         </>
       )}

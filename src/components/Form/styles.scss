@@ -4,11 +4,11 @@
   min-width: 30rem;
 
   &__errors {
-    border: 0.2rem dashed $color-error-100;
+    background-color: $color-error-5;
+    border-radius: $radius-sm;
     font-size: $font-size-sm;
     list-style: disc;
-    margin-bottom: $spacing-sm;
-    padding: $spacing-xs $spacing-md;
+    padding: $spacing-sm $spacing-md;
 
     &__title {
       font-weight: 600;

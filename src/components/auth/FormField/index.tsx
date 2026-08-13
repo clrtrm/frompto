@@ -13,11 +13,13 @@ interface Props extends Omit<
   placeholder?: string
   type?: string
   required?: boolean
+  helper?: string
   value: string
 }
 
 const FormField = ({
   autoComplete,
+  helper,
   id,
   label,
   onChange,
@@ -32,6 +34,9 @@ const FormField = ({
       {label}
       {required && '*'}
     </label>
+    {helper ? (
+      <span className="form-field-component__label__helper">({helper})</span>
+    ) : null}
     <input
       autoComplete={autoComplete}
       className="form-field-component__input"

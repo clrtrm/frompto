@@ -1,0 +1,26 @@
+.sign-up-page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+
+  .success-message {
+    margin-top: $spacing-md;
+    max-width: 60rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  .sign-up-page-main-content {
+    margin-top: $spacing-md;
+    max-width: 40rem;
+    width: 100%;
+
+    .sign-up-form {
+      display: flex;
+      flex-direction: column;
+      row-gap: $spacing-md;
+    }
+  }
+}

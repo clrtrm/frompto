@@ -1,0 +1,17 @@
+.characters-count-component {
+  display: flex;
+  font-size: $font-size-sm;
+  justify-content: flex-end;
+
+  .counter {
+    margin-right: 0.2rem;
+
+    &--valid {
+      color: $color-success-100;
+    }
+
+    &--warning {
+      color: $color-warning-100;
+    }
+  }
+}

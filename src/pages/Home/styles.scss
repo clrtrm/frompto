@@ -1,0 +1,58 @@
+.home-page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-top: $spacing-xl;
+
+  .greeting {
+    color: $color-primary-40;
+    font-size: $font-size-lg;
+  }
+
+  &__header {
+    border-bottom: 0.1rem solid $color-primary-90;
+    padding-bottom: $spacing-sm;
+    width: 80rem;
+
+    .prompt-date {
+      color: $color-primary-90;
+      font-size: $font-size-md;
+      font-weight: 500;
+    }
+  }
+
+  &__body {
+    display: flex;
+    justify-content: center;
+    margin-top: $spacing-lg;
+    width: 80rem;
+
+    .reply {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      &__status {
+        font-size: $font-size-sm;
+      }
+
+      &__body {
+        background-color: papayawhip;
+        border-radius: $radius-sm;
+        overflow-wrap: break-word;
+        padding: $spacing-md $spacing-lg;
+      }
+    }
+
+    .reply-form {
+      width: 100%;
+
+      textarea {
+        border: 0.1rem solid $color-primary-90;
+        border-radius: $radius-sm;
+        padding: $spacing-md $spacing-lg;
+      }
+    }
+  }
+}

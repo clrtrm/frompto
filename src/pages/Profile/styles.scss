@@ -1,0 +1,46 @@
+.profile-page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+
+  .page-main-content {
+    margin-top: $spacing-md;
+    max-width: 60rem;
+    width: 100%;
+
+    .user-info {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      row-gap: $spacing-lg;
+
+      &__image {
+        aspect-ratio: 1/1;
+        background: $color-neutral-5;
+        border-radius: 50%;
+        height: 20rem;
+        width: 20rem;
+      }
+
+      &__text {
+        column-gap: 1.6rem;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        row-gap: $spacing-md;
+
+        .user-info-key {
+          font-weight: 600;
+        }
+
+        .user-info-value {
+          &--default {
+            color: $color-primary-10;
+            font-style: italic;
+          }
+        }
+      }
+    }
+  }
+}

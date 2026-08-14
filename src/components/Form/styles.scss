@@ -1,0 +1,23 @@
+.form-component {
+  display: flex;
+  flex-direction: column;
+  min-width: 30rem;
+
+  &__errors {
+    background-color: $color-error-5;
+    border-radius: $radius-sm;
+    font-size: $font-size-sm;
+    list-style: disc;
+    padding: $spacing-sm $spacing-md;
+
+    &__title {
+      font-weight: 600;
+    }
+  }
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    row-gap: $spacing-sm;
+  }
+}

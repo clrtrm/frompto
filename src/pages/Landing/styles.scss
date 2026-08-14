@@ -1,0 +1,15 @@
+.landing-page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - $navbar-height - 8rem);
+  justify-content: center;
+
+  &__body {
+    .pitch {
+      font-size: $font-size-lg;
+      line-height: 200%;
+      text-align: center;
+    }
+  }
+}
